@@ -4,7 +4,7 @@ import type {
   BarCornerRadius,
   BarTextPosition,
   BarFillPercentage,
-} from "../types/BarTypes";
+} from "../../types/BarTypes";
 
 interface GenericBarProps {
   colour: BarColour;
