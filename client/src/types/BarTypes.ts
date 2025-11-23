@@ -1,7 +1,7 @@
-type BarColour = "green" | "yellow" | "red" | "blue" | "terracotta";
-type BarCornerRadius = "light" | "heavy";
-type BarTextPosition = "left" | "right" | "none";
-type BarFillPercentage =
+export type BarColour = "green" | "yellow" | "red" | "blue" | "terracotta";
+export type BarCornerRadius = "light" | "heavy";
+export type BarTextPosition = "left" | "right" | "none";
+export type BarFillPercentage =
     0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9 |
     10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 |
     20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 |

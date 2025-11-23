@@ -7,7 +7,7 @@ import { WikiHeader } from "../../components/wiki/WikiHeader";
 export const WikiMonstersPage = () => {
   return (
     <div className="flex flex-col h-full w-full space-y-[1rem] overflow-y-scroll justify-start items-center m-[2rem]">
-      <WikiHeader title="Monsters"></WikiHeader>
+      <WikiHeader title="Monsters" />
 
       <WikiMonsterCard
         image={MonsterIdentifier.ROCKY_RHINO}
