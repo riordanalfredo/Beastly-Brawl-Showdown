@@ -9,6 +9,10 @@ export const WikiIndex = () => {
     return wikitopage.find((p) => p.name === name)?.title || name;
   };
 
+  const getIcon = (name: string): string => {
+    return wikitopage.find((p) => p.name === name)?.icon || "📖";
+  };
+
   return (
     <BlankPage>
       <div className="flex flex-col h-full w-full overflow-y-auto justify-start items-center px-4 py-6 sm:p-8">
@@ -25,7 +29,7 @@ export const WikiIndex = () => {
                   href={`/wiki/${page}`}
                 >
                   <span className="text-2xl sm:text-3xl md:text-4xl flex-shrink-0">
-                    📖
+                    {getIcon(page)}
                   </span>
                   <span className="flex-1">{getTitle(page)}</span>
                   <span className="text-sm sm:text-lg md:text-xl text-blackCurrant opacity-50">
