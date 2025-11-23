@@ -17,10 +17,6 @@ export const WikiIndex = () => {
         </div>
 
         <div className="flex flex-col w-full max-w-[90vw] md:max-w-[50rem] xl:max-w-[90rem] bg-peach justify-start items-center whitespace-pre-line p-4 sm:p-8 space-y-4 border-[0.3rem] sm:border-[0.4rem] border-blackCurrant rounded-xl shadow-lg">
-          <h3 className="font-jua text-blackCurrant text-2xl sm:text-3xl md:text-4xl mb-4 text-center">
-            Wiki Index
-          </h3>
-
           <ul className="flex flex-col w-full justify-start items-stretch space-y-3 sm:space-y-4 list-none">
             {VALID_WIKI_PAGES.map((page) => (
               <li key={page} className="w-full">

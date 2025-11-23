@@ -24,7 +24,10 @@ export const WikiHeader = ({ title }: WikiHeaderProps) => {
 
       {/* Title Card - Centered and responsive */}
       <div className="flex items-center justify-center w-full sm:w-auto">
-        <BaseCard color="peach" className="px-8 py-3 sm:px-12 sm:py-4 whitespace-nowrap">
+        <BaseCard
+          color="peach"
+          className="px-8 py-3 sm:px-12 sm:py-4 whitespace-nowrap"
+        >
           <OutlineTextBP size="extraLarge">{title}</OutlineTextBP>
         </BaseCard>
       </div>
