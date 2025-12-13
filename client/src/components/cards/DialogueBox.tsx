@@ -42,7 +42,7 @@ export function DialogueBox(props: DialogueBoxProps) {
         mx-auto
         border-blackCurrant
         border-b-0
-        border-6
+        outline-solid
         bottom-0
         flex 
         place-items-center 
@@ -65,7 +65,7 @@ export function DialogueBox(props: DialogueBoxProps) {
         inline-flex
         border-blackCurrant
         border-b-0
-        border-[6px]
+        border-consistent
         bottom-0
         flex 
         xl:px-[1rem]

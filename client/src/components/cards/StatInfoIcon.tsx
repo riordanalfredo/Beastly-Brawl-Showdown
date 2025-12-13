@@ -33,7 +33,7 @@ export const StatInfoIcon = ({
 
   return (
     <div className="flex flex-col items-center w-full h-full">
-      <div className="border-[3px] border-blackCurrant bg-goldenRod rounded-full sm:size-[8rem] lg:size-[5rem] flex justify-center items-center">
+      <div className="border-consistent border-blackCurrant bg-goldenRod rounded-full sm:size-[8rem] lg:size-[5rem] flex justify-center items-center">
         <img className="size-[70%]" src={imgpath[stat]}></img>
       </div>
       <ColourfulStatText

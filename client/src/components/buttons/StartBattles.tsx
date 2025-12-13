@@ -8,7 +8,7 @@ const StartBattles: React.FC = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>Start Battles</button>
+      <button onClick={handleClick } className="outline-consistent">Start Battles</button>
     </div>
   );
 };

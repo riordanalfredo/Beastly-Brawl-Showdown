@@ -27,7 +27,7 @@ export const GenericHeader = ({ children, color }: HeaderProps) => {
         h-normalPhoneHeight
         rounded-bl-xl
         rounded-br-xl
-        border-[4px]
+        border-consistent
         border-blackCurrant
         w-fit
         border-t-0

@@ -107,6 +107,11 @@ h2 {
   @apply sm:outline-[0.75rem] md:outline-[0.5rem] lg:outline-[0.25rem];
 }
 
+.border-consistent {
+  @apply sm:border-[0.75rem] md:border-[0.5rem] lg:border-[0.25rem];
+}
+
+
 @keyframes glow-pulse {
   0%,
   100% {

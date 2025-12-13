@@ -14,7 +14,7 @@ export const EquipmentCard = ({ equipment, onClick }: EquipmentProps) => {
       onClick={onClick}
       className="
     bg-heliotrope
-    border border-[4px] border-blackCurrant
+    border border-blackCurrant
     rounded-2xl
     w-[40rem]
     xl:w-[40rem]
@@ -28,6 +28,7 @@ export const EquipmentCard = ({ equipment, onClick }: EquipmentProps) => {
     ease-in-out 
     hover:scale-102 
     hover:shadow-lg
+    border-consistent
     "
     >
       <div className="grid grid-cols-[1fr_4fr] gap-4 w-full p-2 justify-center items-center">

@@ -71,9 +71,6 @@ export const ButtonGeneric = ({
 		items-center
 		justify-around
 		text-merino
-		sm:outline-[0.75rem]
-		md:outline-[0.5rem]
-		lg:outline-[0.25rem]
 		outline-offset-0
 		font-[Jua]
 		font-medium
@@ -112,6 +109,7 @@ export const ButtonGeneric = ({
       transition-transform duration-200 ease-in-out
       hover:scale-103
       hover:shadow-md
+      outline-consistent
 		`}
     onClick={onClick ? () => { playSFX("click"); onClick(); } : undefined }
     >

@@ -112,7 +112,7 @@ export function LoginPopup({
 
           <button
             type="submit"
-            className="bg-blackCurrant text-white py-2 rounded"
+            className="bg-blackCurrant text-white py-2 rounded outline-consistent"
           >
             {mode === "login" ? "Log In" : "Register"}
           </button>
@@ -125,7 +125,7 @@ export function LoginPopup({
               setMessage("");
               setMode(mode === "login" ? "register" : "login");
             }}
-            className="mt-2 underline text-sm"
+            className="mt-2 underline text-sm outline-consistent"
           >
             {mode === "login"
               ? "Don't have an account? Register here"

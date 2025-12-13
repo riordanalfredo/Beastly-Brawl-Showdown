@@ -7,7 +7,6 @@ export const EmptyEquipmentCard = ({}) => {
     <button
       className="
     bg-[#A3A3A3]
-    border-[4px] 
     border-blackCurrant
     rounded-2xl
     w-[40rem]
@@ -16,6 +15,7 @@ export const EmptyEquipmentCard = ({}) => {
     justify-center
     items-center
     lg:h-[8rem]
+    border-consistent
     "
     >
       <div className="flex flex-col justify-center items-center rounded-2xl">

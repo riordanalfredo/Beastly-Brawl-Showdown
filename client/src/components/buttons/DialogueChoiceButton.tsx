@@ -11,6 +11,23 @@ export const DialogueChoiceButton = ({
   onClick,
   isDisabled = false,
 }: DialogueChoiceButtonProp) => {
+  // const baseButton = `
+  //   bg-pictonBlue
+  //   outline-blackCurrant
+  //   inline-flex
+  //   items-center
+  //   justify-around
+  //   text-merino
+  //   outline-[0.3rem]
+  //   outline-offset-0
+  //   font-[Jua]
+  //   rounded-[1rem]
+  //   px-[1rem]
+  //   py-[1rem]
+  //   xl:py-[0.5rem]
+  //   xl:px-[0.5rem]
+  // `;
+
   const baseButton = `
     bg-pictonBlue
     outline-blackCurrant
@@ -18,7 +35,6 @@ export const DialogueChoiceButton = ({
     items-center
     justify-around
     text-merino
-    outline-[0.3rem]
     outline-offset-0
     font-[Jua]
     rounded-[1rem]
@@ -50,6 +66,7 @@ export const DialogueChoiceButton = ({
       className={`
         ${baseButton}
         ${isDisabled ? disabledButton : enabledButton}
+        outline-consistent
       `}
       onClick={onClick}
     >

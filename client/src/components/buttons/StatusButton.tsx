@@ -24,8 +24,7 @@ export const StatusButton = ({ status }: StatusButtonProp) => {
     rounded-[1rem]
     items-center
     outline-blackCurrant
-    xl:outline-[0.2rem]
-    outline-[0.5rem]
+    outline-consistent
     flex
     flex-col
     overflow-visible

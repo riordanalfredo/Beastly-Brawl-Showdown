@@ -23,7 +23,7 @@ export const BattleFooter = ({
     mx-auto
     rounded-tl-[5rem]
     rounded-tr-[5rem]
-    border-[4px]
+    border-consistent
     border-blackCurrant
     border-b-0
     flex 

@@ -14,7 +14,7 @@ export const ConsumableCard = ({ consumable, onClick }: ConsumableProps) => {
       onClick={onClick}
       className="
     bg-consumablePink
-    border border-[4px] border-blackCurrant
+    border border-blackCurrant
     rounded-2xl
     w-[40rem]
     p-[1rem]
@@ -27,6 +27,7 @@ export const ConsumableCard = ({ consumable, onClick }: ConsumableProps) => {
     ease-in-out 
     hover:scale-102 
     hover:shadow-lg
+    border-consistent
     "
     >
       <div className="grid grid-cols-[1fr_4fr] gap-4 w-full p-2 justify-center items-center">

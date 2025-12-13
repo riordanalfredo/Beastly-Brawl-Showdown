@@ -16,7 +16,7 @@ const Rules = () => {
         <li>The last beast standing wins the game.</li>
         <li>Use special abilities wisely!</li>
       </ol>
-      <button onClick={goToList}>Go to List</button>
+      <button onClick={goToList} className="outline-consistent">Go to List</button>
     </div>
   );
 };

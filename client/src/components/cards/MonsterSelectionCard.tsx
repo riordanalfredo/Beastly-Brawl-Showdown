@@ -27,7 +27,7 @@ export const MonsterSelectionCard = ({
   return (
     <button
       className={`${colorLoader[type]} 
-                border border-[4px] border-blackCurrant 
+                
                 rounded-xl
                 sm:w-[95%]
                 lg:w-[70%]
@@ -39,7 +39,10 @@ export const MonsterSelectionCard = ({
                 ease-in-out 
                 hover:scale-102 
                 hover:shadow-lg
-                z-10`}
+                z-10
+                outline-consistent
+                duration-200
+                `}
       onClick={onClick}
     >
       <div className="flex flex-col shrink-0 justify-center items-center">

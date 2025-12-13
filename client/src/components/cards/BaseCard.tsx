@@ -20,7 +20,7 @@ export const BaseCard = ({
   return (
     <div
       onClick={onClick} 
-      className={`bg-${color} flex items-center justify-around border-[4px] border-blackCurrant w-min h-min rounded-xl ${className}`}
+      className={`bg-${color} flex items-center justify-around border-consistent border-blackCurrant w-min h-min rounded-xl ${className}`}
       style={{
         width: width ? `${width}rem` : undefined,
         height: height ? `${height}rem` : undefined,

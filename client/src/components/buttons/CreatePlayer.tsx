@@ -18,7 +18,7 @@ const CreatePlayer: React.FC = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button onClick={handleClick}>Create Player</button>
+      <button onClick={handleClick} className="outline-consistent">Create Player</button>
     </div>
   );
 };

@@ -36,7 +36,7 @@ export const HeaderWithLeave = ({ children, color }: HeaderWithLeaveProps) => {
             h-normalPhoneHeight
             rounded-bl-xl
             rounded-br-xl
-            border-[4px]
+            border-consistent
             border-blackCurrant
             border-t-0
             text-center
