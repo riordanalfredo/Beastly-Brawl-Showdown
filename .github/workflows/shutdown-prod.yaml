@@ -2,13 +2,10 @@ name: Prod - Shutdown Droplet
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "55 13 * * *"
 
 jobs:
   call-shutdown-template:
     name: Shutdown Droplet
-    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/shutdown-template.yaml
     with:
       env: prod

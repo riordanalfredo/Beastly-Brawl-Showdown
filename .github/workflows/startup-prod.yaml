@@ -6,7 +6,6 @@ on:
 jobs:
   call-startup-template:
     name: Startup Droplet & Deploy Game
-    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/startup-template.yaml
     with:
       env: prod

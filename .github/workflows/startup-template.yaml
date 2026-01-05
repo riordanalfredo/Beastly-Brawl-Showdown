@@ -33,7 +33,7 @@ env:
   snapshot_name: bbs-snapshot-latest-${{ inputs.env }}
   droplet_name: droplet-bbs-game-server-${{ inputs.env }}
   droplet_user: root
-  ghcr_user: fit3170-beastly-brawl
+  ghcr_user: riordanalfredo
   image_name: beastly-brawl-${{ inputs.env }}
   registry: ghcr.io
 
