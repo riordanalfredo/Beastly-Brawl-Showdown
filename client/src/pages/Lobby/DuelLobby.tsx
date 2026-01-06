@@ -11,14 +11,106 @@ import { monsterMeta } from "../../data/monsterMeta";
 import { BlackText } from "../../components/texts/BlackText";
 import { motion, AnimatePresence } from "framer-motion";
 import { BaseCard } from "../../components/cards/BaseCard";
+import { PlayerState } from "../../../../types/single/playerState";
+import { BattleMonsterImage } from "../../components/player-screen/monsters/BattleMonsterImage";
+import { MonsterImage } from "../../components/player-screen/monsters/MonsterImage";
+import { MonsterImageResizable } from "../../components/player-screen/monsters/MonsterImageResizable";
+import { ArchetypeIdentifier } from "../../../../types/single/monsterState";
 
 interface DuelLobbyProps {}
 
 const DuelLobby: React.FC<DuelLobbyProps> = () => {
-  const [observedLevel, setObservedLevel] = useState<number>(1);
-  // const UNLOCKED_LEVELS = [0];
-  // UPDATE: Set back to just level 1 unlocked
-  const [unlockedLevels, setUnlockedLevels] = useState<number[]>([1]);
+  const fakePlayer: PlayerState = {
+    id: "player-1",
+    name: "Test Player",
+
+    currentHealth: 100,
+    currentAttackStat: 15,
+    currentArmourClassStat: 12,
+
+    successBlock: 0,
+    successHit: 0,
+
+    statuses: [],
+
+    monster: {
+      id: MonsterIdentifier.ROCKY_RHINO,
+      archetypeId: ArchetypeIdentifier.DEFENDER,
+      name: "Rocky Rhino",
+      description: "A rhino",
+
+      maxHealth: 10,
+      attackBonus: 10,
+      armourClass: 10,
+
+      startingHP: 10,
+      startingATK: 10,
+      startingAC: 10,
+
+      possibleActions: [],
+    },
+
+    logs: [],
+    battleLogs: [],
+
+    equipment: [],
+    consumables: [],
+    storyItems: [],
+
+    attackState: {
+      attackDamage: 1,
+      critRate: 1,
+      diceRange: 1,
+    },
+
+    battleWon: 0,
+    abilitiesUsed: 0,
+    mostDamageDealt: 0,
+    successfulBlocks: 0,
+    criticalHitsDealt: 0,
+
+    animations: [],
+  };
+  const fakePlayer2: PlayerState = {
+    id: "player-2",
+    name: "Test Player 2",
+
+    currentHealth: 100,
+    currentAttackStat: 15,
+    currentArmourClassStat: 12,
+
+    successBlock: 0,
+    successHit: 0,
+
+    statuses: [],
+
+    monster: null,
+
+    logs: [],
+    battleLogs: [],
+
+    equipment: [],
+    consumables: [],
+    storyItems: [],
+
+    attackState: {
+      attackDamage: 1,
+      critRate: 1,
+      diceRange: 1,
+    },
+
+    battleWon: 0,
+    abilitiesUsed: 0,
+    mostDamageDealt: 0,
+    successfulBlocks: 0,
+    criticalHitsDealt: 0,
+
+    animations: [],
+  };
+  const [playerState, setPlayerState] = useState<PlayerState | null>(
+    fakePlayer
+  );
+  const [opponentState, setOpponentState] = useState<PlayerState | null>(null);
 
   useEffect(() => {}, []);
 
@@ -51,12 +143,30 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
         {/* "CLASSIC" header */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 z-50 pt-3">
           <BaseCard color="schoolBusYellow" width={40} height={8}>
-            <OutlineText size="extraLarge">CLASSIC</OutlineText>
+            <OutlineText size="extraLarge">
+              WAITING FOR OPPONENT....
+            </OutlineText>
           </BaseCard>
         </div>
       </div>
       <div className="lg:flex h-screen w-screen lg:h-[90%] lg:w-[80%] fixed">
-        <div className="max-lg:absolute max-lg:inset-0 lg:flex-1 bg-defender/70 max-lg:h-full max-lg:[clip-path:polygon(0_100%,100%_100%,0_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-l-xl"></div>
+        <div className="flex items-end justify-center max-lg:absolute max-lg:inset-0 lg:flex-1 bg-defender/70 max-lg:h-full max-lg:[clip-path:polygon(0_100%,100%_100%,0_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-l-xl">
+          <div className="flex flex-col items-center">
+            <OutlineText size="choice-text">
+              {!playerState?.monster
+                ? playerState?.name
+                : playerState?.name + `'s`}
+            </OutlineText>
+            <OutlineText size="choice-text">
+              {playerState?.monster ? `${playerState?.monster.name}` : ``}
+            </OutlineText>
+            <MonsterImageResizable
+              name={playerState?.monster ? playerState?.monster?.id : "NONE"}
+              width={20}
+              height={20}
+            ></MonsterImageResizable>
+          </div>
+        </div>
         <svg
           className="lg:invisible absolute inset-0 z-15 pointer-events-none w-full h-full"
           viewBox="0 0 100 100"
