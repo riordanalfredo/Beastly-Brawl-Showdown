@@ -35,6 +35,7 @@ import SeasonalEventMonsterSelect from "./src/pages/Seasonal_Event/SeasonalEvent
 import SeasonalEventBattle from "./src/pages/Seasonal_Event/SeasonalEventBattle";
 import SeasonalEventWin from "./src/pages/Seasonal_Event/SeasonalEventWin";
 import SeasonalEventDefeated from "./src/pages/Seasonal_Event/SeasonalEventDefeated";
+import DuelLobby from "./src/pages/Lobby/DuelLobby";
 
 function mount(Component: React.FC) {
   const container = document.getElementById("react-target");
@@ -214,7 +215,6 @@ FlowRouter.route("/final-results-scoring-tournament/:code?", {
   },
 });
 
-
 FlowRouter.route("/seasonal-event/home/:eventId?", {
   name: "SeasonalEventHome",
   action(params) {
@@ -263,7 +263,7 @@ const adventureLevelMonsters = [
   MonsterIdentifier.FURIOUS_FLIPPER,
   MonsterIdentifier.CHARMER_COBRA,
   MonsterIdentifier.POISON_POGO,
-  MonsterIdentifier.JACKED_O_LANTERN
+  MonsterIdentifier.JACKED_O_LANTERN,
 ];
 
 //create flow router for each level
@@ -325,6 +325,13 @@ FlowRouter.route("/rules", {
   action() {
     document.title = "Rules | Beastly Brawl Showdown";
     mount(Rules);
+  },
+});
+
+FlowRouter.route("/test-triangles", {
+  name: "Triangles",
+  action() {
+    mount(DuelLobby);
   },
 });
 
