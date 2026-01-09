@@ -13,9 +13,10 @@ import WinnerScreen from "./WinnerScreen";
 
 interface WaitingScreenProps {
   setScreen: (screen: Screens) => void;
+  isDuel?: boolean;
 }
 
-const WaitingScreen: React.FC<WaitingScreenProps> = ({ setScreen }) => {
+const WaitingScreen: React.FC<WaitingScreenProps> = ({ setScreen, isDuel }) => {
   // Sample battle stats data - TODO: Replace this with real player's data
   const [battleStats, setBattleStats] = useState({
     battleWon: 0,

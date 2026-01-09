@@ -11,39 +11,35 @@ import { BlackText } from "../../components/texts/BlackText";
 import { PopupClean } from "../../components/popups/PopupClean";
 
 // Used for auto-filling the game code from the URL / QR code
-interface JoinLobbyProps {
+interface CreateDuelLobbyProps {
   gameCode?: string;
 }
 
-const JoinLobby: React.FC<JoinLobbyProps> = ({ gameCode }) => {
+const CreateDuelLobby: React.FC<CreateDuelLobbyProps> = ({ gameCode }) => {
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
-  // On mount, prefill code from prop
-  useEffect(() => {
-    if (gameCode) {
-      setCode(gameCode);
-    }
-  }, [gameCode]);
 
-  // Called when 'JOIN ROOM' button is clicked
+  // Called when 'CREATE DUEL' button is clicked
   const joinSession = () => {
-    socket.emit("join-game", { gameCode: code, name: name.trim() });
+    socket.emit("create-game", { gameCode: code, name: name.trim(), isDuel: "true" });
   };
+
 
   // Listen for the "join-accept" event from the server
   socket.on("join-accept", ({ gameSessionId }) => {
-    socket.emit("request-selected-background-theme", { gameCode: gameSessionId });
+    // socket.emit("request-selected-background-theme", { gameCode: gameSessionId });
     console.log(gameSessionId);
-    FlowRouter.go(`/session/${gameSessionId}`);
+    FlowRouter.go(`/session/${gameSessionId}`, {}, { duel: "true" })
   });
 
   // Listen for the "join-reject" event from the server
-  socket.on("join-reject", (errors: string[]) => {
+  socket.on("duel-join-reject", (errors: string[]) => {
     console.error("Join rejected:", errors);
     setErrors(errors);
   });
+
 
   return (
     <BlankPage>
@@ -91,19 +87,6 @@ const JoinLobby: React.FC<JoinLobbyProps> = ({ gameCode }) => {
 
       <div className="flex flex-row h-1/2 w-full items-center justify-around">
         <div className="flex flex-col h-full lg:space-y-6 lg:w-1/4.8 sm:w-1/2 items-center sm:justify-around">
-          <div className="w-full lg:max-w-xs">
-            <BlackText size="medium">Please Enter Room Code:</BlackText>
-            <InputBox
-              pattern="[0-9]*"
-              maxLength={6}
-              value={code}
-              onChange={(e) => {
-                const numericValue = e.target.value.replace(/\D/g, ""); // remove non-digits
-                setCode(numericValue);
-              }}
-              placeholder="Enter 6-Digit Code"
-            />
-          </div>
 
           <div className="w-full lg:max-w-xs">
             <BlackText size="medium">Name:</BlackText>
@@ -115,8 +98,8 @@ const JoinLobby: React.FC<JoinLobbyProps> = ({ gameCode }) => {
             />
           </div>
 
-          <ButtonGeneric color="blue" size="medium" onClick={joinSession}>
-            <OutlineText size="medium">JOIN ROOM</OutlineText>
+          <ButtonGeneric color="blue" size="medium" onClick={joinSession} >
+            <OutlineText size="medium">CREATE DUEL</OutlineText>
           </ButtonGeneric>
         </div>
       </div>
@@ -124,4 +107,4 @@ const JoinLobby: React.FC<JoinLobbyProps> = ({ gameCode }) => {
   );
 };
 
-export default JoinLobby;
+export default CreateDuelLobby;

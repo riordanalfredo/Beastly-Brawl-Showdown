@@ -106,7 +106,7 @@ export const GameConfiguration = () => {
             iconColour="black"
             buttonColour="red"
             size="medium"
-            onClick={() => FlowRouter.go("/")}
+            onClick={() => FlowRouter.go("/online")}
           />
         </div>
         <CardWithHeader headerText="GAME SETTINGS" headerColor="ronchi" cardColor="opaqueWhite">

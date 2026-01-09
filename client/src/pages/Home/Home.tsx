@@ -64,7 +64,7 @@ useEffect(() => {
   };
 
   const renderJoinLobby = () => {
-;
+
     FlowRouter.go("/join");
   };
 
@@ -92,6 +92,10 @@ useEffect(() => {
   const renderAdventure = () => {
     FlowRouter.go("/adventure/mode-select");
   };
+
+  const renderOnline = () => {
+    FlowRouter.go("/online");
+  }
 
   // Called on 'Event' button press
   const handleSeasonalEvent = () => {
@@ -212,14 +216,9 @@ useEffect(() => {
           <ButtonGeneric
             color="ronchi"
             size="large"
-            onClick={renderConfigPage}
-            mobileHidden="true"
+            onClick={renderOnline}
           >
-            <OutlineText size="large">HOST GAME</OutlineText>
-          </ButtonGeneric>
-
-          <ButtonGeneric color="ronchi" size="large" onClick={renderJoinLobby}>
-            <OutlineText size="large">JOIN GAME</OutlineText>
+            <OutlineText size="large">ONLINE</OutlineText>
           </ButtonGeneric>
   
         <ButtonGeneric color="ronchi" size="large" onClick={handleAdventure}>

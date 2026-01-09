@@ -29,9 +29,10 @@ import { removeSelectedBackgroundTheme, setSelectedBackgroundTheme } from "../..
 
 interface MonsterSelectProps {
   setScreen: (screen: Screens) => void;
+  isDuel?: boolean;
 }
 
-export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen }) => {
+export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen, isDuel }) => {
   const [monsters, setMonsters] = useState<MonsterState[]>([]);
   const [archetypes, setArchetypes] = useState<ArchetypeInfo[]>([]);
   const [selectedMonster, setSelectedMonster] = useState<MonsterState | null>(
