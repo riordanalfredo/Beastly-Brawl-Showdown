@@ -39,6 +39,7 @@ export default class GameSession {
   private finalResults: GameSessionFinalResults;
   private selectedBackgroundTheme: string = "";
   private finalWinner: PlayerState | null = null;
+  private isDuel: boolean = false;
 
   // Initialise sample data
   private gameSessionData: GameSessionData = {
@@ -149,6 +150,14 @@ export default class GameSession {
 
   public setMaxPlayers(max:number): void {
     this.player_max = max;
+  }
+
+  public setIsDuel(isDuel: boolean): void {
+    this.isDuel = isDuel;
+  }
+
+  public getIsDuel(): boolean {
+    return this.isDuel;
   }
 
 

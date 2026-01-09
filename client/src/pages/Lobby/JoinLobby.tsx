@@ -33,10 +33,15 @@ const JoinLobby: React.FC<JoinLobbyProps> = ({ gameCode }) => {
   };
 
   // Listen for the "join-accept" event from the server
-  socket.on("join-accept", ({ gameSessionId }) => {
-    socket.emit("request-selected-background-theme", { gameCode: gameSessionId });
-    console.log(gameSessionId);
-    FlowRouter.go(`/session/${gameSessionId}`);
+  socket.on("join-accept", ({ gameSessionId, isDuel }) => {
+    if (isDuel === "false") {
+      socket.emit("request-selected-background-theme", { gameCode: gameSessionId });
+      console.log(gameSessionId, isDuel);
+      FlowRouter.go(`/session/${gameSessionId}`);
+    } else {
+      FlowRouter.go(`/session/${gameSessionId}`, {}, { duel: "true" })
+    }
+
   });
 
   // Listen for the "join-reject" event from the server

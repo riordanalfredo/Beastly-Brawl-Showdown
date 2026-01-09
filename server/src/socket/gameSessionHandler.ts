@@ -10,7 +10,7 @@ import { GameModeIdentifier } from "/types/single/gameMode";
 import { join } from "path";
 
 export const gameSessionHandler = (io: Server, socket: Socket) => {
-  const joinGameHandler = ({ gameCode, name, isDuel }: { gameCode: string; name: string, isDuel: boolean}) => {
+  const joinGameHandler = ({ gameCode, name }: { gameCode: string; name: string}) => {
     try {
       console.log(
         `Join request for Code: ${gameCode}, User: ${name} - ${socket.id}`
@@ -19,9 +19,6 @@ export const gameSessionHandler = (io: Server, socket: Socket) => {
 
       const session = activeGameSessions.get(gameCodeN);
 
-      if (isDuel === true) {
-        session?.setMaxPlayers(2);
-      }
 
       if (!session) {
         // If session of given game code doesn't exist
@@ -104,6 +101,7 @@ export const gameSessionHandler = (io: Server, socket: Socket) => {
       // Update player success message
       socket.emit("join-accept", {
         gameSessionId: gameCode,
+        isDuel: session.getIsDuel().toString(),
       });
     } catch (err) {
       console.error("Unexpected join error:", err);
@@ -147,6 +145,8 @@ export const gameSessionHandler = (io: Server, socket: Socket) => {
     });
 
     if (data.isDuel === "true"){
+      session.setIsDuel(true);
+      session.setMaxPlayers(2);
       joinGameHandler({gameCode: session.getGameCode().toString(), name: data.name, isDuel: true});
     }
   });
