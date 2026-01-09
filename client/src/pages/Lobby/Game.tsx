@@ -16,6 +16,11 @@ export const Game: React.FC<GameProps> = ({ gameSessionId }) => {
     return queryParams.duel === "true";
   });
 
+  const [isHost, setIsHost] = useState<boolean>(() => {
+    const queryParams = FlowRouter.current().queryParams;
+    return queryParams.isHost === "true";
+  });
+
   const [screen, setScreen] = useState<Screens>(() => {
     const queryParams = FlowRouter.current().queryParams;
     if (queryParams.fromBattle === "true") {
@@ -45,12 +50,12 @@ export const Game: React.FC<GameProps> = ({ gameSessionId }) => {
         return <MonsterSelect setScreen={setScreen} isDuel={isDuel} />;
       case Screens.WAITING_SCREEN:
         return isDuel ? (
-          <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} />
+          <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} isHost={isHost} gameSessionId={gameSessionId} />
         ) : (
           <WaitingScreen setScreen={setScreen} isDuel={isDuel} />
         );
       case Screens.DUEL_WAITING_SCREEN:
-        return <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} />;
+        return <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} isHost={isHost} gameSessionId={gameSessionId} />;
       default:
         return <MonsterSelect setScreen={setScreen} isDuel={isDuel} />;
     }

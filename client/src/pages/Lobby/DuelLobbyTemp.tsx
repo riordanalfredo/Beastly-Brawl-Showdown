@@ -13,17 +13,24 @@ import { userInfo } from "os";
 import { SeasonalEventIdentifier } from "../../../../types/single/seasonalEventState";
 import { BlackText } from "../../components/texts/BlackText";
 import { Screens } from "../../screens";
+import { PlayerState } from "../../../../types/single/playerState";
 
 interface DuelLobbyTempProps {
   setScreen: (screen: Screens) => void;
   isDuel?: boolean;
+  isHost?: boolean;
+  gameSessionId: string;
 }
 
-export const DuelLobbyTemp: React.FC<DuelLobbyTempProps> = ({ setScreen, isDuel }) => {
+export const DuelLobbyTemp: React.FC<DuelLobbyTempProps> = ({ setScreen, isDuel, isHost = false, gameSessionId }) => {
   const [players, setPlayers] = useState<PlayerState[]>([]);
 
   useEffect(() => {
-    socket.on("update-players", ({ message, players }) => {
+    const battleStartedHandler = (battleId: string) => {
+      FlowRouter.go(`/battle/${battleId}`);
+    };
+
+    const handleUpdatePlayers = ({ message, players }: { message: string; players: PlayerState[] }) => {
       console.log(message);
 
       // Update player list
@@ -32,12 +39,21 @@ export const DuelLobbyTemp: React.FC<DuelLobbyTempProps> = ({ setScreen, isDuel 
       } else {
         console.error("'players' is not an array", players);
       }
-    });
+    };
+
+    socket.on("update-players", handleUpdatePlayers);
+    socket.on("battle-started", battleStartedHandler);
 
     return () => {
       socket.off("update-players", handleUpdatePlayers);
     };
   }, []);
+
+  // start game
+  const startGame = () => {
+    console.log("DEBUGGING: STARTGAME CALLED");
+    socket.emit("start-game", { gameCode: gameSessionId });
+  };
 
   return (
     <BlankPage>
@@ -65,8 +81,12 @@ export const DuelLobbyTemp: React.FC<DuelLobbyTempProps> = ({ setScreen, isDuel 
             color="ronchi"
             size="large"
             mobileHidden="true"
+            isDisabled={!isHost}
+            onClick={startGame}
             >
-            <OutlineText size="large">INVITE</OutlineText>
+            <OutlineText size="large">
+              {players.length === 2 ? "PLAY" : "INVITE"}
+            </OutlineText>
           </ButtonGeneric>
         </div>
     </BlankPage>

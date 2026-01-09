@@ -31,7 +31,9 @@ const CreateDuelLobby: React.FC<CreateDuelLobbyProps> = ({ gameCode }) => {
   socket.on("join-accept", ({ gameSessionId }) => {
     // socket.emit("request-selected-background-theme", { gameCode: gameSessionId });
     console.log(gameSessionId);
-    FlowRouter.go(`/session/${gameSessionId}`, {}, { duel: "true" })
+    
+    
+    FlowRouter.go(`/session/${gameSessionId}`, {}, { duel: "true", isHost: "true" })
   });
 
   // Listen for the "join-reject" event from the server
