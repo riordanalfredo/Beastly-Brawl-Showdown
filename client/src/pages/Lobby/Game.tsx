@@ -4,33 +4,55 @@ import { Screens } from "../../screens";
 import WaitingScreen from "../Game/WaitingScreen";
 import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 import { MonsterSelect } from "../Game/MonsterSelect";
+import { DuelLobbyTemp } from "./DuelLobbyTemp";
 
 interface GameProps {
   gameSessionId: string; // Add battleId as a prop
 }
 
 export const Game: React.FC<GameProps> = ({ gameSessionId }) => {
+  const [isDuel, setIsDuel] = useState<boolean>(() => {
+    const queryParams = FlowRouter.current().queryParams;
+    return queryParams.duel === "true";
+  });
+
   const [screen, setScreen] = useState<Screens>(() => {
     const queryParams = FlowRouter.current().queryParams;
     if (queryParams.fromBattle === "true") {
-      return Screens.WAITING_SCREEN;
+      // If returning from battle, go to appropriate waiting screen
+      return queryParams.duel === "true" 
+        ? Screens.DUEL_WAITING_SCREEN 
+        : Screens.WAITING_SCREEN;
     }
     return Screens.CHARACTER_SELECT_SCREEN;
   }); // State to track the current screen
 
-  // add on reload?
-  socket.on("new-connect", () => {
-    FlowRouter.go("/");
-  });
+  useEffect(() => {
+    const handleNewConnect = () => {
+      FlowRouter.go("/");
+    };
+
+    socket.on("new-connect", handleNewConnect);
+
+    return () => {
+      socket.off("new-connect", handleNewConnect);
+    };
+  }, []);
 
   const renderScreen = () => {
     switch (screen) {
       case Screens.CHARACTER_SELECT_SCREEN:
-        return <MonsterSelect setScreen={setScreen} />;
+        return <MonsterSelect setScreen={setScreen} isDuel={isDuel} />;
       case Screens.WAITING_SCREEN:
-        return <WaitingScreen setScreen={setScreen} />;
+        return isDuel ? (
+          <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} />
+        ) : (
+          <WaitingScreen setScreen={setScreen} isDuel={isDuel} />
+        );
+      case Screens.DUEL_WAITING_SCREEN:
+        return <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} />;
       default:
-        return <MonsterSelect setScreen={setScreen} />;
+        return <MonsterSelect setScreen={setScreen} isDuel={isDuel} />;
     }
   };
 
