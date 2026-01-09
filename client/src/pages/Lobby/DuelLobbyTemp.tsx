@@ -20,6 +20,24 @@ interface DuelLobbyTempProps {
 }
 
 export const DuelLobbyTemp: React.FC<DuelLobbyTempProps> = ({ setScreen, isDuel }) => {
+  const [players, setPlayers] = useState<PlayerState[]>([]);
+
+  useEffect(() => {
+    socket.on("update-players", ({ message, players }) => {
+      console.log(message);
+
+      // Update player list
+      if (Array.isArray(players)) {
+        setPlayers(players);
+      } else {
+        console.error("'players' is not an array", players);
+      }
+    });
+
+    return () => {
+      socket.off("update-players", handleUpdatePlayers);
+    };
+  }, []);
 
   return (
     <BlankPage>
@@ -34,6 +52,15 @@ export const DuelLobbyTemp: React.FC<DuelLobbyTempProps> = ({ setScreen, isDuel 
       </div>
 
         <div className="flex flex-col lg:space-y-[1rem] space-y-[3rem] items-center flex-grow justify-center ">
+            {/* Player labels for testing */}
+            <div className="flex flex-col gap-4 mb-8">
+              {players.map((player, index) => (
+                <BlackText key={index} size="large">
+                  Player {index + 1}: {player.name}
+                </BlackText>
+              ))}
+            </div>
+
             <ButtonGeneric
             color="ronchi"
             size="large"
