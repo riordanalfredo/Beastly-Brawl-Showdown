@@ -147,6 +147,11 @@ export default class GameSession {
     return this.waitQueue;
   }
 
+  public setMaxPlayers(max:number): void {
+    this.player_max = max;
+  }
+
+
   // Add player to Game Session queue
   public addPlayer(player: Player): { success: boolean; reason?: string } {
     if (!this.canSocketJoin(player.getId())) {

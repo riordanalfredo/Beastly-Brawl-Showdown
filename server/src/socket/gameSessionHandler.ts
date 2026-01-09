@@ -7,44 +7,10 @@ import { ScoringTournament } from "../model/host/gamemode/scoringTournament";
 import { BattleRoyale } from "../model/host/gamemode/battleRoyale";
 import { playerAccounts } from "../../main";
 import { GameModeIdentifier } from "/types/single/gameMode";
+import { join } from "path";
 
 export const gameSessionHandler = (io: Server, socket: Socket) => {
-  // Create game session
-  socket.on("create-game", (data) => {
-    console.log("Attempting game session creation...");
-
-    console.log("[MODE SELECTION]: ", data);
-    let session: GameSession;
-    //TODO: move this to a separate function if we have more multiplayer modes.
-    if (data.mode === GameModeIdentifier.SCORING) {
-      session = new GameSession(socket.id, {
-        mode: new ScoringTournament({ rounds: data.selectedSliderValue }),
-      });
-    } else {
-      session = new GameSession(socket.id, { mode: new BattleRoyale() });
-    }
-    session.setSelectedBackgroundTheme(data.selectedBackgroundTheme);
-
-    // Check if game code already exists, if so, generate a new one
-    while (activeGameSessions.has(session.getGameCode())) {
-      console.log("Game session already exists. Generating new code...");
-      session.generateGameCode();
-    }
-    activeGameSessions.set(session.getGameCode(), session);
-
-    console.log(
-      `Game session created: ${session.getGameCode()} | hostId: ${socket.id}`
-    );
-    socket.join(`game-${session.getGameCode()}`);
-
-    socket.emit("new-game", {
-      // UPDATE: change who this emits to because potentially two ppl clicking host at same time would call this
-      code: session.getGameCode(),
-    });
-  });
-
-  // Join request
-  socket.on("join-game", ({ gameCode, name }) => {
+  const joinGameHandler = ({ gameCode, name, isDuel }: { gameCode: string; name: string, isDuel: boolean}) => {
     try {
       console.log(
         `Join request for Code: ${gameCode}, User: ${name} - ${socket.id}`
@@ -52,6 +18,11 @@ export const gameSessionHandler = (io: Server, socket: Socket) => {
       const gameCodeN = Number(gameCode);
 
       const session = activeGameSessions.get(gameCodeN);
+
+      if (isDuel === true) {
+        session?.setMaxPlayers(2);
+      }
+
       if (!session) {
         // If session of given game code doesn't exist
         console.log(`Join request failed. Invalid Code`);
@@ -140,7 +111,48 @@ export const gameSessionHandler = (io: Server, socket: Socket) => {
         "An unexpected error occurred. Please try again.",
       ]);
     }
+  }
+
+  // Create game session
+  socket.on("create-game", (data) => {
+    console.log("Attempting game session creation...");
+
+    console.log("[MODE SELECTION]: ", data);
+    let session: GameSession;
+    //TODO: move this to a separate function if we have more multiplayer modes.
+    if (data.mode === GameModeIdentifier.SCORING) {
+      session = new GameSession(socket.id, {
+        mode: new ScoringTournament({ rounds: data.selectedSliderValue }),
+      });
+    } else {
+      session = new GameSession(socket.id, { mode: new BattleRoyale() });
+    }
+    session.setSelectedBackgroundTheme(data.selectedBackgroundTheme);
+
+    // Check if game code already exists, if so, generate a new one
+    while (activeGameSessions.has(session.getGameCode())) {
+      console.log("Game session already exists. Generating new code...");
+      session.generateGameCode();
+    }
+    activeGameSessions.set(session.getGameCode(), session);
+
+    console.log(
+      `Game session created: ${session.getGameCode()} | hostId: ${socket.id}`
+    );
+    socket.join(`game-${session.getGameCode()}`);
+
+    socket.emit("new-game", {
+      // UPDATE: change who this emits to because potentially two ppl clicking host at same time would call this
+      code: session.getGameCode(),
+    });
+
+    if (data.isDuel === "true"){
+      joinGameHandler({gameCode: session.getGameCode().toString(), name: data.name, isDuel: true});
+    }
   });
+
+  // Join request
+  socket.on("join-game", joinGameHandler);
 
   // Join as host
   socket.on("host-game", ({ gameCode }) => {
@@ -152,7 +164,7 @@ export const gameSessionHandler = (io: Server, socket: Socket) => {
     const session = activeGameSessions.get(gameCodeN);
     if (!session) {
       // If session of given game code doesn't exist
-      console.log(`Join request failed. Invalid Code`);
+      console.log(`Join request failed. Invalid Code ${gameCode}`);
       socket.emit("join-reject", {
         message: "Invalid game code. Unable to join as host.",
         code: gameCode,
@@ -294,7 +306,7 @@ export const gameSessionHandler = (io: Server, socket: Socket) => {
     const session = activeGameSessions.get(gameCodeN);
     if (!session) {
       // If session of given game code doesnt exist
-      console.log(`Request failed. Invalid Code`);
+      console.log(`Request failed. Invalid Code ${gameCode}`);
       return;
     }
 
