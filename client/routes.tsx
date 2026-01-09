@@ -36,6 +36,8 @@ import SeasonalEventBattle from "./src/pages/Seasonal_Event/SeasonalEventBattle"
 import SeasonalEventWin from "./src/pages/Seasonal_Event/SeasonalEventWin";
 import SeasonalEventDefeated from "./src/pages/Seasonal_Event/SeasonalEventDefeated";
 import DuelLobby from "./src/pages/Lobby/DuelLobby";
+import { OnlineLobby } from "./src/pages/Lobby/OnlineLobby";
+import CreateDuelLobby from "./src/pages/Lobby/CreateDuelLobby";
 
 function mount(Component: React.FC) {
   const container = document.getElementById("react-target");
@@ -97,6 +99,21 @@ FlowRouter.route("/wiki/:slug", {
     mount(() => <WikiPage pageName={params.slug as WikiPageIdentifier} />);
   },
 });
+
+FlowRouter.route("/online", {
+  name: "OnlineSession",
+  action(params: any){
+    mount(OnlineLobby);
+  }
+})
+
+FlowRouter.route("/duel-create", {
+  name: "DuelLobby",
+  action() {
+    mount(CreateDuelLobby);
+  }
+});
+
 
 FlowRouter.route("/host", {
   name: "HostLobby",
