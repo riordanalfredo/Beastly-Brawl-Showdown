@@ -24,10 +24,6 @@ export const OnlineLobby = () => {
     console.log("Game session created");
   };
 
-  socket.on("new-game", ({ code }) => {
-    const codeString = code.toString();
-    FlowRouter.go(`/host/${codeString}`);
-  });
 
   const renderJoinLobby = () => {
 
