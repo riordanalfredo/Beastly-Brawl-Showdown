@@ -107,16 +107,37 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
               onClick={() => setShowingInvitePanel(false)}
             />
           </div>
-          <div className="flex flex-col items-center relative top-0">
+          <div className="flex flex-col justify-between items-center">
             <div className="items-center flex-col inline-block inline-flex outline-offset-0 relative">
-              <OutlineText size="choice-text">{`Room Code: ${gameSessionId}`}</OutlineText>
+              <OutlineText size="choice-text">{`Room Code:`}</OutlineText>
+              <OutlineText size="choice-text">{`${gameSessionId}`}</OutlineText>
             </div>
             <QRCodeSVG
               value={`${Meteor.settings.public.SERVER_URLS[0]}/join/${gameSessionId}`}
-              size={400}
+              size={300}
               bgColor="#FFFFFF"
               marginSize={2}
             />
+            <div className="flex flex-row justify-evenly grow">
+              <BaseCard color="alto">
+                <BlackText size="tiny">
+                  <p className="truncate text-ellipsis w-64">
+                    {`${Meteor.settings.public.SERVER_URLS[0]}/join/${gameSessionId}`}
+                  </p>
+                </BlackText>
+              </BaseCard>
+              <IconButton
+                style="cog"
+                buttonColour="alto"
+                iconColour="black"
+                size="small"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `${Meteor.settings.public.SERVER_URLS[0]}/join/${gameSessionId}`
+                  );
+                }}
+              />
+            </div>
           </div>
         </PopupClean>
       )}
@@ -128,7 +149,7 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
             iconColour="black"
             buttonColour="red"
             size="medium"
-            onClick={() => FlowRouter.go("/adventure/mode-select")}
+            onClick={() => FlowRouter.go("/")}
           />
         </div>
 
