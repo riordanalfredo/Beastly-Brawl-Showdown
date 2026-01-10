@@ -18,112 +18,70 @@ import { MonsterImageResizable } from "../../components/player-screen/monsters/M
 import { ArchetypeIdentifier } from "../../../../types/single/monsterState";
 import { PopupClean } from "../../components/popups/PopupClean";
 import { QRCodeSVG } from "qrcode.react";
+import { Screens } from "../../screens";
+import { Meteor } from "meteor/meteor";
 
-interface DuelLobbyProps {}
+interface DuelLobbyProps {
+  setScreen: (screen: Screens) => void;
+  isDuel?: Boolean;
+  isHost?: Boolean;
+  gameSessionId: string;
+}
 
-const DuelLobby: React.FC<DuelLobbyProps> = () => {
-  const fakePlayer: PlayerState = {
-    id: "player-1",
-    name: "Test Player",
-
-    currentHealth: 100,
-    currentAttackStat: 15,
-    currentArmourClassStat: 12,
-
-    successBlock: 0,
-    successHit: 0,
-
-    statuses: [],
-
-    monster: {
-      id: MonsterIdentifier.ROCKY_RHINO,
-      archetypeId: ArchetypeIdentifier.DEFENDER,
-      name: "Rocky Rhino",
-      description: "A rhino",
-
-      maxHealth: 10,
-      attackBonus: 10,
-      armourClass: 10,
-
-      startingHP: 10,
-      startingATK: 10,
-      startingAC: 10,
-
-      possibleActions: [],
-    },
-
-    logs: [],
-    battleLogs: [],
-
-    equipment: [],
-    consumables: [],
-    storyItems: [],
-
-    attackState: {
-      attackDamage: 1,
-      critRate: 1,
-      diceRange: 1,
-    },
-
-    battleWon: 0,
-    abilitiesUsed: 0,
-    mostDamageDealt: 0,
-    successfulBlocks: 0,
-    criticalHitsDealt: 0,
-
-    animations: [],
-  };
-  const fakePlayer2: PlayerState = {
-    id: "player-2",
-    name: "Test Player 2",
-
-    currentHealth: 100,
-    currentAttackStat: 15,
-    currentArmourClassStat: 12,
-
-    successBlock: 0,
-    successHit: 0,
-
-    statuses: [],
-
-    monster: null,
-
-    logs: [],
-    battleLogs: [],
-
-    equipment: [],
-    consumables: [],
-    storyItems: [],
-
-    attackState: {
-      attackDamage: 1,
-      critRate: 1,
-      diceRange: 1,
-    },
-
-    battleWon: 0,
-    abilitiesUsed: 0,
-    mostDamageDealt: 0,
-    successfulBlocks: 0,
-    criticalHitsDealt: 0,
-
-    animations: [],
-  };
-  const [playerState, setPlayerState] = useState<PlayerState | null>(
-    fakePlayer
-  );
-  const [opponentState, setOpponentState] = useState<PlayerState | null>(
-    fakePlayer2
-  );
+const DuelLobby: React.FC<DuelLobbyProps> = ({
+  setScreen,
+  isDuel,
+  isHost,
+  gameSessionId,
+}: DuelLobbyProps) => {
+  const [playerState, setPlayerState] = useState<PlayerState | null>(null);
+  const [opponentState, setOpponentState] = useState<PlayerState | null>(null);
   const [showingInvitePanel, setShowingInvitePanel] = useState<Boolean>(false);
   const [inviteAccepted, setInviteAccepted] = useState<Boolean>(false);
-  const [roomCode, setRoomCode] = useState<number>(111111);
 
   const handleStartGame = () => {
-    //socketemit and flowrouter for game start
+    console.log("DEBUGGING: STARTGAME CALLED");
+    socket.emit("start-game", { gameCode: gameSessionId });
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const battleStartedHandler = (battleId: string) => {
+      FlowRouter.go(`/battle/${battleId}`);
+    };
+
+    const handleUpdatePlayers = ({
+      message,
+      players,
+    }: {
+      message: string;
+      players: PlayerState[];
+    }) => {
+      console.log(message);
+
+      // Update player list
+      if (Array.isArray(players)) {
+        console.log(players);
+        //setPlayers(players);
+        setPlayerState(players[0]);
+        setOpponentState(players[1]);
+        console.log("Current player state", playerState);
+        console.log("Current opponent state", opponentState);
+        if (opponentState != null) {
+          console.log("Invite has been accepted");
+          setInviteAccepted(true);
+        }
+      } else {
+        console.error("'players' is not an array", players);
+      }
+    };
+
+    socket.on("update-players", handleUpdatePlayers);
+    socket.on("battle-started", battleStartedHandler);
+
+    return () => {
+      socket.off("update-players", handleUpdatePlayers);
+    };
+  }, [opponentState]);
 
   // Monster image (coloured or silhouette if locked)
 
@@ -151,11 +109,10 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
           </div>
           <div className="flex flex-col items-center relative top-0">
             <div className="items-center flex-col inline-block inline-flex outline-offset-0 relative">
-              <OutlineText size="choice-text">{`Room Code: ${roomCode}`}</OutlineText>
+              <OutlineText size="choice-text">{`Room Code: ${gameSessionId}`}</OutlineText>
             </div>
             <QRCodeSVG
-              //value={`${Meteor.settings.public.SERVER_URLS[0]}/join/${code}`}
-              value={"111111"}
+              value={`${Meteor.settings.public.SERVER_URLS[0]}/join/${gameSessionId}`}
               size={400}
               bgColor="#FFFFFF"
               marginSize={2}
@@ -187,7 +144,9 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
       <div className="absolute h-screen w-screen flex items-center justify-center z-40">
         <ButtonGeneric
           color={inviteAccepted ? "pink" : "purple"}
-          isDisabled={inviteAccepted && !opponentState?.monster}
+          isDisabled={
+            (opponentState != null && !opponentState?.monster) || !isHost
+          }
           size="battle"
           onClick={
             !inviteAccepted
@@ -200,7 +159,7 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
           }
         >
           <OutlineText size="choice-text">
-            {inviteAccepted ? "PLAY" : "INVITE"}
+            {opponentState != null ? "PLAY" : "INVITE"}
           </OutlineText>
         </ButtonGeneric>
       </div>

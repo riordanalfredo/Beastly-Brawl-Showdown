@@ -102,18 +102,17 @@ FlowRouter.route("/wiki/:slug", {
 
 FlowRouter.route("/online", {
   name: "OnlineSession",
-  action(params: any){
+  action(params: any) {
     mount(OnlineLobby);
-  }
-})
+  },
+});
 
 FlowRouter.route("/duel-create", {
   name: "DuelLobby",
   action() {
     mount(CreateDuelLobby);
-  }
+  },
 });
-
 
 FlowRouter.route("/host", {
   name: "HostLobby",
@@ -345,7 +344,7 @@ FlowRouter.route("/rules", {
   },
 });
 
-FlowRouter.route("/test-triangles", {
+FlowRouter.route("/duel-lobby", {
   name: "Triangles",
   action() {
     mount(DuelLobby);

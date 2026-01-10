@@ -5,6 +5,7 @@ import WaitingScreen from "../Game/WaitingScreen";
 import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 import { MonsterSelect } from "../Game/MonsterSelect";
 import { DuelLobbyTemp } from "./DuelLobbyTemp";
+import DuelLobby from "./DuelLobby";
 
 interface GameProps {
   gameSessionId: string; // Add battleId as a prop
@@ -25,8 +26,8 @@ export const Game: React.FC<GameProps> = ({ gameSessionId }) => {
     const queryParams = FlowRouter.current().queryParams;
     if (queryParams.fromBattle === "true") {
       // If returning from battle, go to appropriate waiting screen
-      return queryParams.duel === "true" 
-        ? Screens.DUEL_WAITING_SCREEN 
+      return queryParams.duel === "true"
+        ? Screens.DUEL_WAITING_SCREEN
         : Screens.WAITING_SCREEN;
     }
     return Screens.CHARACTER_SELECT_SCREEN;
@@ -50,12 +51,24 @@ export const Game: React.FC<GameProps> = ({ gameSessionId }) => {
         return <MonsterSelect setScreen={setScreen} isDuel={isDuel} />;
       case Screens.WAITING_SCREEN:
         return isDuel ? (
-          <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} isHost={isHost} gameSessionId={gameSessionId} />
+          <DuelLobby
+            setScreen={setScreen}
+            isDuel={isDuel}
+            isHost={isHost}
+            gameSessionId={gameSessionId}
+          />
         ) : (
           <WaitingScreen setScreen={setScreen} isDuel={isDuel} />
         );
       case Screens.DUEL_WAITING_SCREEN:
-        return <DuelLobbyTemp setScreen={setScreen} isDuel={isDuel} isHost={isHost} gameSessionId={gameSessionId} />;
+        return (
+          <DuelLobby
+            setScreen={setScreen}
+            isDuel={isDuel}
+            isHost={isHost}
+            gameSessionId={gameSessionId}
+          />
+        );
       default:
         return <MonsterSelect setScreen={setScreen} isDuel={isDuel} />;
     }
