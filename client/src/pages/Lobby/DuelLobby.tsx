@@ -16,6 +16,8 @@ import { BattleMonsterImage } from "../../components/player-screen/monsters/Batt
 import { MonsterImage } from "../../components/player-screen/monsters/MonsterImage";
 import { MonsterImageResizable } from "../../components/player-screen/monsters/MonsterImageResizable";
 import { ArchetypeIdentifier } from "../../../../types/single/monsterState";
+import { PopupClean } from "../../components/popups/PopupClean";
+import { QRCodeSVG } from "qrcode.react";
 
 interface DuelLobbyProps {}
 
@@ -110,7 +112,16 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
   const [playerState, setPlayerState] = useState<PlayerState | null>(
     fakePlayer
   );
-  const [opponentState, setOpponentState] = useState<PlayerState | null>(null);
+  const [opponentState, setOpponentState] = useState<PlayerState | null>(
+    fakePlayer2
+  );
+  const [showingInvitePanel, setShowingInvitePanel] = useState<Boolean>(false);
+  const [inviteAccepted, setInviteAccepted] = useState<Boolean>(false);
+  const [roomCode, setRoomCode] = useState<number>(111111);
+
+  const handleStartGame = () => {
+    //socketemit and flowrouter for game start
+  };
 
   useEffect(() => {}, []);
 
@@ -127,10 +138,34 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
           backgroundImage: backgroundString,
         }}
       />
-
+      {showingInvitePanel && (
+        <PopupClean>
+          <div className="relative bottom-20 right-12 h-min w-min">
+            <IconButton
+              size="small"
+              style="x"
+              buttonColour="red"
+              iconColour="black"
+              onClick={() => setShowingInvitePanel(false)}
+            />
+          </div>
+          <div className="flex flex-col items-center relative top-0">
+            <div className="items-center flex-col inline-block inline-flex outline-offset-0 relative">
+              <OutlineText size="choice-text">{`Room Code: ${roomCode}`}</OutlineText>
+            </div>
+            <QRCodeSVG
+              //value={`${Meteor.settings.public.SERVER_URLS[0]}/join/${code}`}
+              value={"111111"}
+              size={400}
+              bgColor="#FFFFFF"
+              marginSize={2}
+            />
+          </div>
+        </PopupClean>
+      )}
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
         {/* Back arrow button */}
-        <div className="fixed top-0 left-0 z-50 lg:ml-5 lg:mt-5 sm:ml-6 sm:mt-6">
+        <div className="fixed bottom-4 left-0 z-50 lg:ml-5 lg:mt-5 sm:ml-6 sm:mt-6">
           <IconButton
             style="arrowleft"
             iconColour="black"
@@ -142,16 +177,36 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
 
         {/* "CLASSIC" header */}
         <div className="fixed top-0 left-1/2 -translate-x-1/2 z-50 pt-3">
-          <BaseCard color="schoolBusYellow" width={40} height={8}>
+          <BaseCard color="schoolBusYellow" width={60} height={12}>
             <OutlineText size="extraLarge">
               WAITING FOR OPPONENT....
             </OutlineText>
           </BaseCard>
         </div>
       </div>
+      <div className="absolute h-screen w-screen flex items-center justify-center z-40">
+        <ButtonGeneric
+          color={inviteAccepted ? "pink" : "purple"}
+          isDisabled={inviteAccepted && !opponentState?.monster}
+          size="battle"
+          onClick={
+            !inviteAccepted
+              ? () => {
+                  setShowingInvitePanel(true);
+                }
+              : () => {
+                  handleStartGame();
+                }
+          }
+        >
+          <OutlineText size="choice-text">
+            {inviteAccepted ? "PLAY" : "INVITE"}
+          </OutlineText>
+        </ButtonGeneric>
+      </div>
       <div className="lg:flex h-screen w-screen lg:h-[90%] lg:w-[80%] fixed">
-        <div className="flex items-end justify-center max-lg:absolute max-lg:inset-0 lg:flex-1 bg-defender/70 max-lg:h-full max-lg:[clip-path:polygon(0_100%,100%_100%,0_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-l-xl">
-          <div className="flex flex-col items-center">
+        <div className="flex max-lg:items-end items-center justify-center max-lg:absolute max-lg:inset-0 lg:flex-1 bg-defender/70 max-lg:h-full max-lg:[clip-path:polygon(0_100%,100%_100%,0_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-l-xl">
+          <div className="flex flex-col items-center max-lg:bottom-80 max-lg:left-35 max-lg:fixed">
             <OutlineText size="choice-text">
               {!playerState?.monster
                 ? playerState?.name
@@ -160,11 +215,13 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
             <OutlineText size="choice-text">
               {playerState?.monster ? `${playerState?.monster.name}` : ``}
             </OutlineText>
-            <MonsterImageResizable
-              name={playerState?.monster ? playerState?.monster?.id : "NONE"}
-              width={20}
-              height={20}
-            ></MonsterImageResizable>
+            <div className="transform -scale-x-100">
+              <MonsterImageResizable
+                name={playerState?.monster ? playerState?.monster?.id : "NONE"}
+                width={20}
+                height={20}
+              ></MonsterImageResizable>
+            </div>
           </div>
         </div>
         <svg
@@ -181,7 +238,25 @@ const DuelLobby: React.FC<DuelLobbyProps> = () => {
             strokeWidth="1"
           />
         </svg>
-        <div className="max-lg:absolute max-lg:inset-0 lg:flex-1 bg-attacker/70 max-lg:h-full max-lg:[clip-path:polygon(0_0,100%_100%,100%_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-r-xl"></div>
+        <div className="flex max-lg:items-start items-center justify-center max-lg:absolute max-lg:inset-0 lg:flex-1 bg-attacker/70 max-lg:h-full max-lg:[clip-path:polygon(0_0,100%_100%,100%_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-r-xl">
+          <div className="flex flex-col items-center max-lg:top-80 max-lg:right-35 max-lg:fixed">
+            <OutlineText size="choice-text">
+              {!opponentState?.monster
+                ? opponentState?.name
+                : opponentState?.name + `'s`}
+            </OutlineText>
+            <OutlineText size="choice-text">
+              {opponentState?.monster ? `${opponentState?.monster.name}` : ``}
+            </OutlineText>
+            <MonsterImageResizable
+              name={
+                opponentState?.monster ? opponentState?.monster?.id : "NONE"
+              }
+              width={20}
+              height={20}
+            ></MonsterImageResizable>
+          </div>
+        </div>
       </div>
     </div>
   );
