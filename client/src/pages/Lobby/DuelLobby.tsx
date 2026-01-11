@@ -38,10 +38,25 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
   const [opponentState, setOpponentState] = useState<PlayerState | null>(null);
   const [showingInvitePanel, setShowingInvitePanel] = useState<Boolean>(false);
   const [inviteAccepted, setInviteAccepted] = useState<Boolean>(false);
+  const [exitPopup, setExitPopup] = useState<Boolean>();
+  const [guestExitPopup, setGuestExitPopup] = useState<Boolean>(false);
 
   const handleStartGame = () => {
     console.log("DEBUGGING: STARTGAME CALLED");
     socket.emit("start-game", { gameCode: gameSessionId });
+  };
+
+  // deletes game session
+  const closeGame = () => {
+    // UPDATE: popup asking if they are sure before returning to game setup screen
+    socket.emit("cancel-game", { gameCode: gameSessionId });
+    // return game setup screen
+    FlowRouter.go("/online");
+  };
+
+    const kickWarningHandler = ({ message }: { message: string }) => {
+    console.log(message);
+    setGuestExitPopup(true);
   };
 
   useEffect(() => {
@@ -77,6 +92,7 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
 
     socket.on("update-players", handleUpdatePlayers);
     socket.on("battle-started", battleStartedHandler);
+    socket.on("kick-warning", kickWarningHandler);
 
     return () => {
       socket.off("update-players", handleUpdatePlayers);
@@ -141,6 +157,59 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
           </div>
         </PopupClean>
       )}
+
+      {/* POPUPS */}
+      {/* Popup: Confirming whether host wants to exit game. */}
+      {exitPopup && isHost && (
+        <PopupClean>
+          <div className="flex flex-col justify-around">
+            <OutlineText size="extraLarge">EXIT GAME?</OutlineText>
+            <BlackText size="large">
+              THIS WILL CANCEL THE GAME SESSION, REMOVING ALL PLAYERS, AND END
+              ALL BATTLES.
+            </BlackText>
+            <div className="mt-[1rem]">
+              <BlackText size="large">
+                ARE YOU SURE YOU WANT TO EXIT?
+              </BlackText>
+            </div>
+            {/* <div className="flex flex-row justify-between items-center"> */}
+            <div className="justify-center items-center flex lg:gap-[5rem] sm:gap-10 pb-[1rem] mt-[1rem]">
+              <ButtonGeneric
+                size="large"
+                color="blue"
+                onClick={() => setExitPopup(false)}
+              >
+                <OutlineText size={"small"}>CANCEL</OutlineText>
+              </ButtonGeneric>
+              <ButtonGeneric size="large" color="red" onClick={closeGame}>
+                <OutlineText size={"small"}>EXIT</OutlineText>
+              </ButtonGeneric>
+            </div>
+          </div>
+        </PopupClean>
+      )}
+
+      {/* Popup */}
+      {guestExitPopup && (
+        <PopupClean>
+          <div className="flex flex-col justify-around">
+            <OutlineText size="extraLarge">
+              YOU HAVE BEEN REMOVED FROM THE GAME SESSION.
+            </OutlineText>
+            <div className="mt-10 flex flex-col items-center">
+              <ButtonGeneric
+                size="large"
+                color="red"
+                onClick={() => FlowRouter.go("/")}
+              >
+                EXIT
+              </ButtonGeneric>
+            </div>
+          </div>
+        </PopupClean>
+      )}
+
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
         {/* Back arrow button */}
         <div className="fixed bottom-4 left-0 z-50 lg:ml-5 lg:mt-5 sm:ml-6 sm:mt-6">
@@ -183,6 +252,18 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
             {opponentState != null ? "PLAY" : "INVITE"}
           </OutlineText>
         </ButtonGeneric>
+
+            <IconButton
+              style="arrowleft"
+              iconColour="black"
+              buttonColour="red"
+              size="medium"
+              isDisabled={
+                (opponentState != null && !opponentState?.monster) || !isHost
+              }
+              onClick={() => setExitPopup(true)}
+            />
+
       </div>
       <div className="lg:flex h-screen w-screen lg:h-[90%] lg:w-[80%] fixed">
         <div className="flex max-lg:items-end items-center justify-center max-lg:absolute max-lg:inset-0 lg:flex-1 bg-defender/70 max-lg:h-full max-lg:[clip-path:polygon(0_100%,100%_100%,0_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-l-xl">
