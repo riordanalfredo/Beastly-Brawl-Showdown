@@ -20,6 +20,7 @@ import { PopupClean } from "../../components/popups/PopupClean";
 import { QRCodeSVG } from "qrcode.react";
 import { Screens } from "../../screens";
 import { Meteor } from "meteor/meteor";
+import { DuelLobbyInfoPopup } from "../../components/popups/DuelLobbyInfoPopup";
 
 interface DuelLobbyProps {
   setScreen: (screen: Screens) => void;
@@ -54,7 +55,7 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
     FlowRouter.go("/online");
   };
 
-    const kickWarningHandler = ({ message }: { message: string }) => {
+  const kickWarningHandler = ({ message }: { message: string }) => {
     console.log(message);
     setGuestExitPopup(true);
   };
@@ -113,7 +114,7 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
         }}
       />
       {showingInvitePanel && (
-        <PopupClean>
+        /**<PopupClean>
           <div className="relative bottom-20 right-12 h-min w-min">
             <IconButton
               size="small"
@@ -143,7 +144,7 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
                 </BlackText>
               </BaseCard>
               <IconButton
-                style="cog"
+                style="copy"
                 buttonColour="alto"
                 iconColour="black"
                 size="small"
@@ -155,7 +156,11 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
               />
             </div>
           </div>
-        </PopupClean>
+        </PopupClean>*/
+        <DuelLobbyInfoPopup
+          setShowingInvitePanel={setShowingInvitePanel}
+          gameSessionId={`${gameSessionId}`}
+        />
       )}
 
       {/* POPUPS */}
@@ -169,9 +174,7 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
               ALL BATTLES.
             </BlackText>
             <div className="mt-[1rem]">
-              <BlackText size="large">
-                ARE YOU SURE YOU WANT TO EXIT?
-              </BlackText>
+              <BlackText size="large">ARE YOU SURE YOU WANT TO EXIT?</BlackText>
             </div>
             {/* <div className="flex flex-row justify-between items-center"> */}
             <div className="justify-center items-center flex lg:gap-[5rem] sm:gap-10 pb-[1rem] mt-[1rem]">
@@ -210,28 +213,16 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
         </PopupClean>
       )}
 
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
-        {/* Back arrow button */}
-        <div className="fixed bottom-4 left-0 z-50 lg:ml-5 lg:mt-5 sm:ml-6 sm:mt-6">
-          <IconButton
-            style="arrowleft"
-            iconColour="black"
-            buttonColour="red"
-            size="medium"
-            onClick={() => FlowRouter.go("/")}
-          />
-        </div>
+      {/* Back arrow button */}
 
-        {/* "CLASSIC" header */}
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 z-50 pt-3">
-          <BaseCard color="schoolBusYellow" width={60} height={12}>
-            <OutlineText size="extraLarge">
-              WAITING FOR OPPONENT....
-            </OutlineText>
-          </BaseCard>
-        </div>
+      {/* "CLASSIC" header */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 z-20 pt-3">
+        <BaseCard color="schoolBusYellow" width={60} height={12}>
+          <OutlineText size="extraLarge">WAITING FOR OPPONENT....</OutlineText>
+        </BaseCard>
       </div>
-      <div className="absolute h-screen w-screen flex items-center justify-center z-40">
+
+      <div className="absolute h-screen w-screen flex items-center justify-center z-10">
         <ButtonGeneric
           color={inviteAccepted ? "pink" : "purple"}
           isDisabled={
@@ -252,18 +243,15 @@ const DuelLobby: React.FC<DuelLobbyProps> = ({
             {opponentState != null ? "PLAY" : "INVITE"}
           </OutlineText>
         </ButtonGeneric>
-
-            <IconButton
-              style="arrowleft"
-              iconColour="black"
-              buttonColour="red"
-              size="medium"
-              isDisabled={
-                (opponentState != null && !opponentState?.monster) || !isHost
-              }
-              onClick={() => setExitPopup(true)}
-            />
-
+        <div className="fixed bottom-4 left-0 lg:ml-5 lg:mt-5 sm:ml-6 sm:mt-6">
+          <IconButton
+            style="arrowleft"
+            iconColour="black"
+            buttonColour="red"
+            size="medium"
+            onClick={() => setExitPopup(true)}
+          />
+        </div>
       </div>
       <div className="lg:flex h-screen w-screen lg:h-[90%] lg:w-[80%] fixed">
         <div className="flex max-lg:items-end items-center justify-center max-lg:absolute max-lg:inset-0 lg:flex-1 bg-defender/70 max-lg:h-full max-lg:[clip-path:polygon(0_100%,100%_100%,0_0)] lg:border-blackcurrant lg:border-[4px] lg:rounded-l-xl">

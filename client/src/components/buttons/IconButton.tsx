@@ -17,7 +17,9 @@ interface IconProps {
     | "leaderboard"
     | "notes"
     | "cog"
-    | "bin";
+    | "bin"
+    | "copy"
+    | "tick";
   buttonColour:
     | "ronchi"
     | "blue"
