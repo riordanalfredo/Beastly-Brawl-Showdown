@@ -163,7 +163,6 @@ jobs:
             MONGO_URL=${{ secrets.MONGO_URL }}
 
       - name: Delete old package versions
-        if: ${{ false }}
         uses: actions/delete-package-versions@v5
         with:
           owner: ${{ env.ghcr_user }}
