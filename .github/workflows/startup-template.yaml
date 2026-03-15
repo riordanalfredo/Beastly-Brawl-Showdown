@@ -173,7 +173,6 @@ jobs:
           token: ${{ secrets.GHCR_PACKAGES_TOKEN }}
 
   deployment:
-    if: ${{ false }}
     name: Deploy the Meteor application using Docker Compose
     runs-on: ubuntu-latest
     needs:

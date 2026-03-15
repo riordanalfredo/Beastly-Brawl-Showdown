@@ -2,7 +2,12 @@ name: Prod - Startup Droplet & Deploy Game
 
 on:
   workflow_dispatch:
-
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 jobs:
   call-startup-template:
     name: Startup Droplet & Deploy Game
