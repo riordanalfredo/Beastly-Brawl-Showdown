@@ -8,13 +8,13 @@ set -x
 
 GITHUB_PACKAGES_TOKEN=$1
 ENV=$2
+GHCR_USER=$3
 
-export BEASTLY_BRAWL_IMAGE="ghcr.io/fit3170-beastly-brawl/beastly-brawl-${ENV}:latest"
+export BEASTLY_BRAWL_IMAGE="ghcr.io/${GHCR_USER}/beastly-brawl-${ENV}:latest"
 
 cd ~/deployment
 
-echo "${GITHUB_PACKAGES_TOKEN}" | docker login ghcr.io -u fit3170-beastly-brawl --password-stdin 
-
+echo "${GITHUB_PACKAGES_TOKEN}" | docker login ghcr.io -u ${GHCR_USER} --password-stdin 
 # Get the latest image from GHCR
 docker compose pull
 

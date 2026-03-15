@@ -31,7 +31,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
   const [monsters, setMonsters] = useState<MonsterState[]>([]);
   const [archetypes, setArchetypes] = useState<ArchetypeInfo[]>([]);
   const [selectedMonster, setSelectedMonster] = useState<MonsterState | null>(
-    null
+    null,
   );
   const [selectedArchetype, setSelectedArchetype] =
     useState<ArchetypeInfo | null>(null);
@@ -106,7 +106,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
       });
 
       console.log(
-        `Adventure Monster ${selectedMonster.name} selected for player`
+        `Adventure Monster ${selectedMonster.name} selected for player`,
       );
     }
   };
@@ -148,7 +148,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
           <hr className="border-t border-gray-900 w-[90%]"></hr>
         </div>
         {monsters.filter(
-          (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER
+          (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER,
         ).length === 0 ? (
           <div className="w-full flex justify-center items-center">
             <div className="w-full text-center">
@@ -160,7 +160,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
         ) : (
           monsters
             .filter(
-              (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER
+              (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER,
             )
             .map((monster) => (
               <MonsterSelectionCard
@@ -188,7 +188,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
           <hr className="border-t border-gray-900 w-[90%]"></hr>
         </div>
         {monsters.filter(
-          (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED
+          (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED,
         ).length === 0 ? (
           <div className="w-full flex justify-center items-center">
             <div className="w-full text-center">
@@ -200,7 +200,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
         ) : (
           monsters
             .filter(
-              (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED
+              (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED,
             )
             .map((monster) => (
               <MonsterSelectionCard
@@ -228,7 +228,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
           <hr className="border-t border-gray-900 w-[90%]"></hr>
         </div>
         {monsters.filter(
-          (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER
+          (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER,
         ).length === 0 ? (
           <div className="w-full flex justify-center items-center">
             <div className="w-full text-center">
@@ -240,7 +240,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
         ) : (
           monsters
             .filter(
-              (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER
+              (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER,
             )
             .map((monster) => (
               <MonsterSelectionCard
@@ -382,7 +382,7 @@ const AdventureMonsterSelect: React.FC<AdventureMonsterSelectProps> = ({}) => {
                     >
                       <img
                         src={
-                          "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/action/" +
+                          "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/action/" +
                           ability.id +
                           ".webp"
                         }

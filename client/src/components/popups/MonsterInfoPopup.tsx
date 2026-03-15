@@ -67,7 +67,7 @@ export const MonsterInfoPopup = ({
       ? `${playerState.monster.id}_${biome.toUpperCase()}`
       : playerState?.monster?.id;
   const monsterImgPath =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/" +
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/" +
     monsterId +
     ".png";
 
@@ -160,7 +160,7 @@ export const MonsterInfoPopup = ({
                   >
                     <img
                       src={
-                        "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/action/" +
+                        "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/action/" +
                         ability.id +
                         ".webp"
                       }

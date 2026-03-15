@@ -24,6 +24,7 @@ env:
   max_num_snapshots: 2
   droplet_user: root
   droplet_name: droplet-bbs-game-server-${{ inputs.env }}
+  ghcr_user: riordanalfredo
 
 jobs:
   shutdown:
@@ -81,7 +82,7 @@ jobs:
           username: ${{ env.droplet_user }}
           key: ${{ secrets.DIGITAL_OCEAN_DROPLET_SSH_PRIVATE_KEY }}
           script: |
-            source ~/deployment/shutdown.sh ${{ inputs.env }}
+            source ~/deployment/shutdown.sh ${{ inputs.env }} ${{ env.ghcr_user }}
 
       # We need to take a snapshot (image) of the droplet before destroying it as this will be used to create new droplets in the future.
       # This helps us save money as simply "shutting down" the droplet does not stop billing. It needs to be destroyed.

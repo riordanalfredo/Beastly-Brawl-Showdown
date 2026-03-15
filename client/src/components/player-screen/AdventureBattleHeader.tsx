@@ -53,8 +53,8 @@ export const AdventureBattleHeader: React.FC<AdventureBattleHeaderProps> = ({
           {battleState.yourPlayer.statuses.map((status) => (
             <img
               className=" size-[4.5rem] xl:size-[2.5rem] object-contain rounded-md inline-block"
-              src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/status/${status.name
-                .replace(/\s+/g, "_")   
+              src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/status/${status.name
+                .replace(/\s+/g, "_")
                 .toUpperCase()}.png`}
               alt={`${status.name.toUpperCase()} image`}
             />
@@ -98,8 +98,8 @@ export const AdventureBattleHeader: React.FC<AdventureBattleHeaderProps> = ({
           {battleState.opponentPlayer.statuses.map((status) => (
             <img
               className=" size-[4.5rem] xl:size-[2.5rem] object-contain rounded-md inline-block"
-              src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/status/${status.name
-                .replace(/\s+/g, "_")   
+              src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/status/${status.name
+                .replace(/\s+/g, "_")
                 .toUpperCase()}.png`}
               alt={`${status.name.toUpperCase()} image`}
             />

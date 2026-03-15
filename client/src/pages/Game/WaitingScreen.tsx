@@ -39,7 +39,7 @@ const WaitingScreen: React.FC<WaitingScreenProps> = ({ setScreen }) => {
 
   var backgroundLocation = getSelectedBackgroundTheme().toUpperCase();
   var backgroundString =
-    "url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/" +
+    "url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/" +
     backgroundLocation +
     ".jpg')";
 
@@ -202,14 +202,14 @@ const WaitingScreen: React.FC<WaitingScreenProps> = ({ setScreen }) => {
 
     console.log(
       "[SOCKET] Before .on(): ",
-      socket.listeners("waiting_screen_data").length
+      socket.listeners("waiting_screen_data").length,
     );
     socket.off("waiting_screen_data", waitingScreenDataHandler);
     socket.on("waiting_screen_data", waitingScreenDataHandler);
 
     console.log(
       "[SOCKET] After .on(): ",
-      socket.listeners("waiting_screen_data").length
+      socket.listeners("waiting_screen_data").length,
     );
     return () => {
       console.log("[SOCKET] Cleanup called");
@@ -223,7 +223,7 @@ const WaitingScreen: React.FC<WaitingScreenProps> = ({ setScreen }) => {
         backgroundImage: backgroundString,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
+        backgroundRepeat: "no-repeat",
       }}
     >
       {isBattleFound && (

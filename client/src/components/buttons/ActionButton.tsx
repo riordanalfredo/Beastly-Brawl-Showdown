@@ -1,7 +1,13 @@
 import React from "react";
 import { ButtonGeneric } from "./ButtonGeneric";
 import { OutlineText } from "../texts/OutlineText";
-import { isBGMEnabled, playBGM,toggleBGM,initBGM,playSFX } from "../../audioManager";
+import {
+  isBGMEnabled,
+  playBGM,
+  toggleBGM,
+  initBGM,
+  playSFX,
+} from "../../audioManager";
 import {
   ActionState,
   ActionIdentifier,
@@ -26,7 +32,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   isDisabled = false,
 }) => {
   const imagePath =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/action/" +
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/action/" +
     actionState.id +
     ".webp";
   const name = actionState.name.toUpperCase();
@@ -46,10 +52,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     if (isDisabled) return;
     if (actionState.id === ActionIdentifier.DEFEND) {
       playSFX("sword");
-    } else if (actionState.id === ActionIdentifier.ATTACK){
+    } else if (actionState.id === ActionIdentifier.ATTACK) {
       playSFX("attack");
-    }
-    else {
+    } else {
       playSFX("special");
     }
     if (finalIsDisabled) return;
@@ -69,10 +74,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     });
     if (actionState.id === ActionIdentifier.DEFEND) {
       playSFX("sword");
-    } else if (actionState.id === ActionIdentifier.ATTACK){
+    } else if (actionState.id === ActionIdentifier.ATTACK) {
       playSFX("attack");
-    }
-    else {
+    } else {
       playSFX("special");
     }
   };
@@ -101,8 +105,8 @@ const ActionButton: React.FC<ActionButtonProps> = ({
           battleId === "ADVENTURE"
             ? adventureClicked
             : battleId === "SEASONALEVENT"
-            ? seasonEventClicked
-            : actionClicked
+              ? seasonEventClicked
+              : actionClicked
         }
         isPassive={isPassive}
       >

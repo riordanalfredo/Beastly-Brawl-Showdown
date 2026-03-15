@@ -28,7 +28,7 @@ const WinnerScreen: React.FC<WinningScreenProps> = ({ playerMonster }) => {
 
   var backgroundLocation = getSelectedBackgroundTheme().toUpperCase();
   var backgroundString =
-    "url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/" +
+    "url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/" +
     backgroundLocation +
     ".jpg')";
 
@@ -57,7 +57,7 @@ const WinnerScreen: React.FC<WinningScreenProps> = ({ playerMonster }) => {
         backgroundImage: backgroundString,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="fixed inset-0 flex flex-col items-center justify-center bg-white/60">
@@ -69,7 +69,7 @@ const WinnerScreen: React.FC<WinningScreenProps> = ({ playerMonster }) => {
 
           <img
             className="w-[40rem] h-[40rem] xl:w-[20rem] xl:h-[20rem]"
-            src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/ending/${playerMonster.id}_WIN.png`}
+            src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/ending/${playerMonster.id}_WIN.png`}
             alt={`${playerMonster.id}_WIN image`}
           />
 

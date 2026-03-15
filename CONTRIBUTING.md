@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/misc/LOGO.png" alt="Beastly Brawl Showdown Logo" width="300" />
+<img src="https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/misc/LOGO.png" alt="Beastly Brawl Showdown Logo" width="300" />
 
 # Contributing Guidelines
 

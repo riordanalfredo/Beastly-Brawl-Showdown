@@ -42,7 +42,7 @@ export const AdventureBagPopup = ({
   const [storyItem, setStoryItem] = useState<StoryItemState | null>(null);
 
   const monsterImgPath =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/" +
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/" +
     playerState?.monster?.id +
     ".png";
 

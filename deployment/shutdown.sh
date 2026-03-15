@@ -7,8 +7,9 @@ set -e
 set -x
 
 ENV=$1
+GHCR_USER=$2
 
-export BEASTLY_BRAWL_IMAGE="ghcr.io/fit3170-beastly-brawl/beastly-brawl-${ENV}:latest"
+export BEASTLY_BRAWL_IMAGE="ghcr.io/${GHCR_USER}/beastly-brawl-${ENV}:latest"
 
 cd ~/deployment
 

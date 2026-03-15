@@ -33,7 +33,7 @@ env:
   snapshot_name: bbs-snapshot-latest-${{ inputs.env }}
   droplet_name: droplet-bbs-game-server-${{ inputs.env }}
   droplet_user: root
-  ghcr_user: fit3170-beastly-brawl
+  ghcr_user: riordanalfredo
   image_name: beastly-brawl-${{ inputs.env }}
   registry: ghcr.io
 
@@ -252,4 +252,4 @@ jobs:
           username: ${{ env.droplet_user }}
           key: ${{ secrets.DIGITAL_OCEAN_DROPLET_SSH_PRIVATE_KEY }}
           script: |
-            source ~/deployment/setup.sh ${{ secrets.GHCR_PACKAGES_TOKEN }} ${{ inputs.env }}
+            source ~/deployment/setup.sh ${{ secrets.GHCR_PACKAGES_TOKEN }} ${{ inputs.env }} ${{ env.ghcr_user }}

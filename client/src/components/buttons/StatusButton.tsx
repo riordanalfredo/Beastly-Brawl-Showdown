@@ -11,8 +11,8 @@ export interface StatusButtonProp {
 
 export const StatusButton = ({ status }: StatusButtonProp) => {
   const [showStatus, setShowStatus] = useState(false);
-  const path = `https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/status/${status.name
-    .replace(/\s+/g, "_")   
+  const path = `https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/status/${status.name
+    .replace(/\s+/g, "_")
     .toUpperCase()}.png`;
 
   const Button = `

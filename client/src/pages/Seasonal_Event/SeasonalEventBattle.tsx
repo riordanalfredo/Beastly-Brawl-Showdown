@@ -40,11 +40,13 @@ interface SeasonalEventBattleProps {
   levelMonster: MonsterIdentifier;
 }
 
-const SeasonalEventBattle: React.FC<SeasonalEventBattleProps> = ({ levelMonster }) => {
+const SeasonalEventBattle: React.FC<SeasonalEventBattleProps> = ({
+  levelMonster,
+}) => {
   const battleId = "SEASONALEVENT";
   var backgroundLocation = getBiomeString(levelMonster); //TODO: change this to be based off level/monster?
   var backgroundString =
-    "url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/" +
+    "url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/" +
     backgroundLocation +
     ".jpg')";
 
@@ -74,7 +76,7 @@ const SeasonalEventBattle: React.FC<SeasonalEventBattleProps> = ({ levelMonster 
   const [equipmentId, setEquipmentId] = useState<string | null>(null);
   const [equipmentInventoryFull, setEquipmentInventoryFull] = useState(false);
   const [currentEquipment, setCurrentEquipment] = useState<EquipmentState[]>(
-    []
+    [],
   );
   const [incomingEquipment, setIncomingEquipment] =
     useState<EquipmentState | null>(null);
@@ -91,7 +93,7 @@ const SeasonalEventBattle: React.FC<SeasonalEventBattleProps> = ({ levelMonster 
 
   const handleChoiceSelect = (
     choiceId: string,
-    itemNames: string[] | null = null
+    itemNames: string[] | null = null,
   ) => {
     socket.emit("adventure_choice", { stage, choiceId });
     setChoices(null);
@@ -115,7 +117,7 @@ const SeasonalEventBattle: React.FC<SeasonalEventBattleProps> = ({ levelMonster 
     };
   }, [stage]);
 
-    useEffect(() => {
+  useEffect(() => {
     const onEventWin = ({ monsterId }: { monsterId: string }) => {
       FlowRouter.go(`/seasonal-event/win/${monsterId}`);
     };
@@ -125,7 +127,7 @@ const SeasonalEventBattle: React.FC<SeasonalEventBattleProps> = ({ levelMonster 
     };
   }, [stage]);
 
-    useEffect(() => {
+  useEffect(() => {
     const onSeasonalEventDefeat = () => {
       FlowRouter.go("/seasonal-event/defeat");
     };
@@ -397,7 +399,7 @@ const biomeMap = new Map([
   [MonsterIdentifier.FURIOUS_FLIPPER, () => "ARCTIC"],
   [MonsterIdentifier.POISON_POGO, () => "MARSH"],
   [MonsterIdentifier.CHARMER_COBRA, () => "DESERT"],
-  [MonsterIdentifier.JACKED_O_LANTERN, () => "MARSH"]
+  [MonsterIdentifier.JACKED_O_LANTERN, () => "MARSH"],
 ]);
 
 export function getBiomeString(monsterID: MonsterIdentifier) {

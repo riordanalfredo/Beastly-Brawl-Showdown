@@ -16,20 +16,20 @@ export const StatInfoIcon = ({
   monsterStat,
 }: StatInfoIconProps) => {
   const imgpath: Record<string, string> = {
-    AC: "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/misc/ARMOUR_CLASS.png",
-    HP: "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/misc/HEALTH.png",
+    AC: "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/misc/ARMOUR_CLASS.png",
+    HP: "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/misc/HEALTH.png",
     "ATK+":
-      "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/misc/ATTACK_BONUS.png",
+      "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/misc/ATTACK_BONUS.png",
   };
 
   const text =
     stat === "HP"
       ? `${statVal} ${stat}`
       : statVal === monsterStat
-      ? `${monsterStat} ${stat}`
-      : `${monsterStat} (${statVal > monsterStat ? "+" : ""}${
-          statVal - monsterStat
-        }) ${stat}`;
+        ? `${monsterStat} ${stat}`
+        : `${monsterStat} (${statVal > monsterStat ? "+" : ""}${
+            statVal - monsterStat
+          }) ${stat}`;
 
   return (
     <div className="flex flex-col items-center w-full h-full">

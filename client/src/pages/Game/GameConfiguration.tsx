@@ -17,17 +17,24 @@ export const GameConfiguration = () => {
   const [selectedGameModeIndex, setSelectedGameModeIndex] = useState(0);
 
   // Use selectedBackgroundThemeIndex to retrieve currently background theme.
-  const [selectedBackgroundThemeIndex, setSelectedBackgroundThemeIndex] = useState(0);
+  const [selectedBackgroundThemeIndex, setSelectedBackgroundThemeIndex] =
+    useState(0);
 
   // Use selectedSliderValue to retrieve the current value of a visible slider.
   const defaultSliderValue = 3;
-  const [selectedSliderValue, setSelectedSliderValue] = useState(defaultSliderValue);
+  const [selectedSliderValue, setSelectedSliderValue] =
+    useState(defaultSliderValue);
 
   // Called on 'Host Lobby' button press
   const createGame = (mode: GameModeIdentifier) => {
-    const selectedBackgroundTheme = backgroundThemeOptions[selectedBackgroundThemeIndex].name;
+    const selectedBackgroundTheme =
+      backgroundThemeOptions[selectedBackgroundThemeIndex].name;
     setSelectedBackgroundTheme(selectedBackgroundTheme);
-    socket.emit("create-game", { mode, selectedBackgroundTheme, selectedSliderValue });
+    socket.emit("create-game", {
+      mode,
+      selectedBackgroundTheme,
+      selectedSliderValue,
+    });
     console.log("Game session created");
   };
 
@@ -36,41 +43,41 @@ export const GameConfiguration = () => {
     {
       title: "Battle Royale",
       description: "Fight until only one player remains standing!",
-      mode: GameModeIdentifier.BATTLE_ROYALE
+      mode: GameModeIdentifier.BATTLE_ROYALE,
     },
-    { 
+    {
       title: "Scored Tournament",
       description: "Earn more points than your opponents over multiple rounds!",
       mode: GameModeIdentifier.SCORING,
       sliderText: "Round Count",
       sliderMin: 1,
-      sliderMax: 5
-    }
+      sliderMax: 5,
+    },
   ];
 
   // Define the name of each background theme.
   const backgroundThemeOptions = [
     {
-      name: "Forest"
+      name: "Forest",
     },
     {
-      name: "Basalt"
+      name: "Basalt",
     },
     {
-      name: "Arctic"
+      name: "Arctic",
     },
     {
-      name: "Marsh"
+      name: "Marsh",
     },
     {
-      name: "Desert"
+      name: "Desert",
     },
     {
-      name: "Colosseum"
+      name: "Colosseum",
     },
     {
-      name: "Endless"
-    }
+      name: "Endless",
+    },
   ];
 
   // Received when Game Session is created. Takes user to 'Host Lobby' Page
@@ -84,13 +91,13 @@ export const GameConfiguration = () => {
       {/* AnimatePresence handles background transitions */}
       <AnimatePresence>
         <motion.div
-          key={selectedBackgroundThemeIndex}  // Ensures re-render on level changes
+          key={selectedBackgroundThemeIndex} // Ensures re-render on level changes
           className="fixed inset-0 -z-10"
           style={{
-            backgroundImage: `url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/${backgroundThemeOptions[selectedBackgroundThemeIndex].name.toUpperCase()}.jpg')`,
+            backgroundImage: `url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/${backgroundThemeOptions[selectedBackgroundThemeIndex].name.toUpperCase()}.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundRepeat: "no-repeat"
+            backgroundRepeat: "no-repeat",
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -109,7 +116,11 @@ export const GameConfiguration = () => {
             onClick={() => FlowRouter.go("/")}
           />
         </div>
-        <CardWithHeader headerText="GAME SETTINGS" headerColor="ronchi" cardColor="opaqueWhite">
+        <CardWithHeader
+          headerText="GAME SETTINGS"
+          headerColor="ronchi"
+          cardColor="opaqueWhite"
+        >
           <div className="flex flex-col items-center justify-center w-3/4 h-3/4 lg:space-y-5 sm:space-y-30">
             <div className="flex flex-row items-center justify-center h-7/16">
               <GameModeSelector
@@ -131,8 +142,16 @@ export const GameConfiguration = () => {
               />
             </div>
             <div className="flex flex-row items-center justify-center h-5/16">
-              <ButtonGeneric color="ronchi" size="medium" onClick={() => createGame(gameModeCardData[selectedGameModeIndex].mode)}>
-                <OutlineTextResizable size="medium">CREATE GAME</OutlineTextResizable>
+              <ButtonGeneric
+                color="ronchi"
+                size="medium"
+                onClick={() =>
+                  createGame(gameModeCardData[selectedGameModeIndex].mode)
+                }
+              >
+                <OutlineTextResizable size="medium">
+                  CREATE GAME
+                </OutlineTextResizable>
               </ButtonGeneric>
             </div>
           </div>

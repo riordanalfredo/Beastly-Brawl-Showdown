@@ -49,12 +49,12 @@ const Battle: React.FC<BattleProps> = ({ battleId }) => {
   const [isSpectating, setIsSpectating] = useState<boolean>(false);
   const [finalScreen, setFinalScreen] = useState<boolean>(true);
   const [gameMode, setGameMode] = useState<GameModeIdentifier>(
-    GameModeIdentifier.SCORING
+    GameModeIdentifier.SCORING,
   );
 
   var backgroundLocation = getSelectedBackgroundTheme().toUpperCase();
   var backgroundString =
-    "url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/" +
+    "url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/" +
     backgroundLocation +
     ".jpg')";
 
@@ -108,7 +108,7 @@ const Battle: React.FC<BattleProps> = ({ battleId }) => {
         } else {
           socket.emit("updateLoss");
         }
-      }
+      },
     );
 
     // TODO: For future, this should handle socket message 'handle_animation' and pass in an animation identifier

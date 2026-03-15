@@ -46,7 +46,7 @@ export const FinalResultsBattleRoyale = ({
   console.log(
     `Winner fetched: ${
       finalWinner ? finalWinner.name : "There is no final winner"
-    }`
+    }`,
   );
 
   // Button handler for restarting a new lobby
@@ -93,7 +93,7 @@ export const FinalResultsBattleRoyale = ({
             </div>
             <img
               className="max-w-[30%] max-h-full object-contain"
-              src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/ending/${finalWinner.monster?.id}_WIN.png`}
+              src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/ending/${finalWinner.monster?.id}_WIN.png`}
               alt={`${finalWinner.monster?.id}_WIN image`}
             />
           </>
@@ -107,17 +107,17 @@ export const FinalResultsBattleRoyale = ({
             <div className="flex flex-row items-center justify-center space-x-[3rem]">
               <img
                 className="max-w-[15%] max-h-full object-contain"
-                src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
+                src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
                 alt="Small GRAVE left"
               />
               <img
                 className="max-w-[30%] max-h-full object-contain"
-                src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
+                src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
                 alt="Main GRAVE image"
               />
               <img
                 className="max-w-[15%] max-h-full object-contain"
-                src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
+                src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
                 alt="Small GRAVE right"
               />
             </div>
