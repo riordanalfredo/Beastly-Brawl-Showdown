@@ -252,4 +252,4 @@ jobs:
           username: ${{ env.droplet_user }}
           key: ${{ secrets.DIGITAL_OCEAN_DROPLET_SSH_PRIVATE_KEY }}
           script: |
-            source ~/deployment/setup.sh ${{ secrets.GHCR_PACKAGES_TOKEN }} ${{ inputs.env }}
+            source ~/deployment/setup.sh ${{ secrets.GHCR_PACKAGES_TOKEN }} ${{ inputs.env }} ${{ env.ghcr_user }}
