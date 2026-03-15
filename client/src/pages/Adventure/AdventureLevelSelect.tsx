@@ -65,12 +65,12 @@ const LevelSelect: React.FC<LevelSelectProps> = () => {
 
   // Monster image (coloured or silhouette if locked)
   const monsterImage = unlockedLevels.includes(observedLevel)
-    ? `https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/${monster}.png`
-    : `https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/silhouettes/${monster}_SILHOUETTE.png`;
+    ? `https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/${monster}.png`
+    : `https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/silhouettes/${monster}_SILHOUETTE.png`;
 
   // Background image
-  const backgroundString = `url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/${getBiomeString(
-    monster
+  const backgroundString = `url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/${getBiomeString(
+    monster,
   )}.jpg')`;
 
   return (

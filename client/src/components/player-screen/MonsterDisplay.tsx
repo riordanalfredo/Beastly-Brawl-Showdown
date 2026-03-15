@@ -14,13 +14,13 @@ const MonsterDisplay: React.FC<MonsterDisplayProps> = ({
   biomeString,
 }) => {
   var imagePath =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/" +
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/" +
     monster.id +
     ".png";
 
   //checks if monster is a slime - then uses biome specific variant
   if (monster.id == MonsterIdentifier.SLIME) {
-    imagePath = `https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/SLIME_${biomeString}.png`;
+    imagePath = `https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/SLIME_${biomeString}.png`;
   }
   return (
     <div className={`monster-display-container ${className ?? ""}`}>

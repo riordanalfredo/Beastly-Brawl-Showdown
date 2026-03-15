@@ -41,7 +41,7 @@ export const ArchetypePopup = ({ archetype, onExit }: ArchetypePopupProp) => {
           <div className="flex flex-row items-center justify-center w-full border-blackCurrant border-[4px] rounded-xl p-[1rem] bg-goldenRod">
             <img
               src={
-                "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/action/" +
+                "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/action/" +
                 archetype.ability.id +
                 ".webp"
               }

@@ -37,7 +37,7 @@ function getZLevel(status: string, z: number): number {
 function getMonsterImage(
   monster: MonsterIdentifier,
   animation: string,
-  biome?: string
+  biome?: string,
 ): string {
   let monsterName = monster;
   if (monster === MonsterIdentifier.SLIME && biome) {
@@ -46,7 +46,7 @@ function getMonsterImage(
 
   if (animation === "default") {
     return (
-      "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/" +
+      "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/" +
       monsterName +
       ".png"
     );
@@ -54,7 +54,7 @@ function getMonsterImage(
 
   if (animation === "ability") {
     return (
-      "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
+      "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
       monsterName +
       "_" +
       animation.toUpperCase() +
@@ -63,7 +63,7 @@ function getMonsterImage(
   }
 
   const image =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
     monsterName +
     "_" +
     animation.toUpperCase() +
@@ -73,7 +73,7 @@ function getMonsterImage(
 
 function getOverlay(overlay: string): string {
   return (
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
     overlay.toUpperCase().replace(/\s+/g, "_") +
     ".png"
   );
@@ -112,7 +112,7 @@ const underlayOptions = ["lake curse", "swamps calm", "swamps whisper"];
 
 function splitAnimations(
   animations: string[],
-  side: string
+  side: string,
 ): [string, string[], string[]] {
   animations = animations.filter((a) => a != "ability"); //exclude ability
 
@@ -124,7 +124,7 @@ function splitAnimations(
     animationImage = "animate-" + aImage[0];
   } else if (aImage.length > 1) {
     console.error(
-      `ANIMATION ERROR: expected only one monster animation: ${aImage}`
+      `ANIMATION ERROR: expected only one monster animation: ${aImage}`,
     );
     animationImage = "animate-" + aImage[0];
   } else {
@@ -138,7 +138,7 @@ function splitAnimations(
 
   //UNDERLAYS
   const underlayImage: string[] = animations.filter((a) =>
-    underlayOptions.includes(a)
+    underlayOptions.includes(a),
   );
 
   //OVERLAYS
@@ -146,7 +146,7 @@ function splitAnimations(
     (a) =>
       !underlayOptions.includes(a) &&
       !animationOptions.includes(a) &&
-      !shieldAnimations.includes(a)
+      !shieldAnimations.includes(a),
   );
   return [animationImage, overlayImage, underlayImage];
 }
@@ -159,7 +159,7 @@ function getShieldAnimation(animations: string[]): [string, string] {
     if (animations.includes(a)) {
       animation = "animate-" + a;
       image =
-        "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
+        "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/" +
         a.toUpperCase().replace("-", "_") +
         ".png";
       return [animation, image];
@@ -183,7 +183,7 @@ export const BattleMonsterImage: React.FC<BattleMonsterImageProps> = ({
 }) => {
   const [animationImage, overlayImage, underlayImage] = splitAnimations(
     animations,
-    side
+    side,
   );
   const monsterSrc = getMonsterImage(monster, "default", biome);
   const hasAbility = animations.includes("ability");

@@ -35,7 +35,7 @@ const DrawScreen: React.FC<DrawScreenProps> = ({
 
   var backgroundLocation = getSelectedBackgroundTheme().toUpperCase();
   var backgroundString =
-    "url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/" +
+    "url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/" +
     backgroundLocation +
     ".jpg')";
 
@@ -57,7 +57,7 @@ const DrawScreen: React.FC<DrawScreenProps> = ({
 
           <img
             className="w-[40rem] h-[40rem] xl:w-[20rem] xl:h-[20rem]"
-            src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
+            src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
             alt={`GRAVE image`}
           />
 

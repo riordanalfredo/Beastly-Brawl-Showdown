@@ -29,14 +29,16 @@ import { ArchetypePopup } from "../../components/popups/ArchetypePopup";
 import { SeasonalEventIdentifier } from "../../../../types/single/seasonalEventState";
 
 interface SeasonalEventMonsterSelectProps {
-  eventMonster: MonsterIdentifier
+  eventMonster: MonsterIdentifier;
 }
 
-export const SeasonalEventMonsterSelect: React.FC<SeasonalEventMonsterSelectProps> = ({ eventMonster }) => {
+export const SeasonalEventMonsterSelect: React.FC<
+  SeasonalEventMonsterSelectProps
+> = ({ eventMonster }) => {
   const [monsters, setMonsters] = useState<MonsterState[]>([]);
   const [archetypes, setArchetypes] = useState<ArchetypeInfo[]>([]);
   const [selectedMonster, setSelectedMonster] = useState<MonsterState | null>(
-    null
+    null,
   );
   const [selectedArchetype, setSelectedArchetype] =
     useState<ArchetypeInfo | null>(null);
@@ -121,12 +123,10 @@ export const SeasonalEventMonsterSelect: React.FC<SeasonalEventMonsterSelectProp
 
       socket.emit("event_monster_selected", {
         monsterID: selectedMonster.id,
-        eventMonsterID: eventMonsterID.toUpperCase()
+        eventMonsterID: eventMonsterID.toUpperCase(),
       });
 
-      console.log(
-        `Event Monster ${selectedMonster.name} selected for player`
-      );
+      console.log(`Event Monster ${selectedMonster.name} selected for player`);
     }
   };
 
@@ -188,7 +188,7 @@ export const SeasonalEventMonsterSelect: React.FC<SeasonalEventMonsterSelectProp
         </div>
         {monsters
           .filter(
-            (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER
+            (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER,
           )
           .map((monster) => (
             <MonsterSelectionCard
@@ -216,7 +216,7 @@ export const SeasonalEventMonsterSelect: React.FC<SeasonalEventMonsterSelectProp
         </div>
         {monsters
           .filter(
-            (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED
+            (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED,
           )
           .map((monster) => (
             <MonsterSelectionCard
@@ -244,7 +244,7 @@ export const SeasonalEventMonsterSelect: React.FC<SeasonalEventMonsterSelectProp
         </div>
         {monsters
           .filter(
-            (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER
+            (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER,
           )
           .map((monster) => (
             <MonsterSelectionCard
@@ -362,7 +362,7 @@ export const SeasonalEventMonsterSelect: React.FC<SeasonalEventMonsterSelectProp
                     >
                       <img
                         src={
-                          "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/action/" +
+                          "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/action/" +
                           ability.id +
                           ".webp"
                         }

@@ -11,7 +11,7 @@ const MostPopularPanel: React.FC<MostPopularPanelProps> = ({
 }) => {
   const formattedName = popularMonster.monster!.id;
   const imageSrc =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/" +
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/" +
     formattedName +
     ".png";
   //console.log("image src = ",imageSrc)

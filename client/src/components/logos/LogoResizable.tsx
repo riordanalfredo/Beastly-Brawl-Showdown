@@ -4,15 +4,11 @@ interface MonsterImageProps {
   className?: string;
 }
 
-const LogoResizable: React.FC<MonsterImageProps> = ({ className = '' }) => {
-  const path = "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/misc/LOGO.png";
+const LogoResizable: React.FC<MonsterImageProps> = ({ className = "" }) => {
+  const path =
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/misc/LOGO.png";
 
-  return (
-    <img
-      src={path}
-      className={`${className}`}
-    />
-  );
+  return <img src={path} className={`${className}`} />;
 };
 
 export default LogoResizable;

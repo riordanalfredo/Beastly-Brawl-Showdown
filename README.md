@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/misc/LOGO.png" alt="Beastly Brawl Showdown Logo" width="300" />
+<img src="https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/misc/LOGO.png" alt="Beastly Brawl Showdown Logo" width="300" />
 
 # Beastly Brawl Showdown
 
@@ -395,7 +395,7 @@ MAJOR.MINOR.PATCH
 
 ### Team Cobra 🐍
 
-<img src="https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/CHARMER_COBRA.png" alt="Team Cobra" width="150" />
+<img src="https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/CHARMER_COBRA.png" alt="Team Cobra" width="150" />
 
 | Member         | Role         | Email                       |
 | -------------- | ------------ | --------------------------- |
@@ -407,7 +407,7 @@ MAJOR.MINOR.PATCH
 
 ### Team Rhino 🦏
 
-<img src="https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/ROCKY_RHINO.png" alt="Team Rhino" width="150" />
+<img src="https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/ROCKY_RHINO.png" alt="Team Rhino" width="150" />
 
 | Member           | Role         | Email                       |
 | ---------------- | ------------ | --------------------------- |
@@ -418,7 +418,7 @@ MAJOR.MINOR.PATCH
 
 ### Team Pogo 🐸
 
-<img src="https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/POISON_POGO.png" alt="Team Pogo" width="150" />
+<img src="https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/POISON_POGO.png" alt="Team Pogo" width="150" />
 
 | Member         | Role         | Email                        |
 | -------------- | ------------ | ---------------------------- |

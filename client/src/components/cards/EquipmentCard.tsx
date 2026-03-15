@@ -39,7 +39,7 @@ export const EquipmentCard = ({ equipment, onClick }: EquipmentProps) => {
         >
           <img
             className="w-full h-full object-contain"
-            src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/items/${equipment.imageString}.png`}
+            src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/items/${equipment.imageString}.png`}
           />
         </div>
 

@@ -34,7 +34,7 @@ export const AdventureSelectMode: React.FC = () => {
       className="inset-0 w-screen h-screen bg-cover bg-center overscroll-contain"
       style={{
         backgroundImage:
-          "url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/FOREST.jpg')",
+          "url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/FOREST.jpg')",
       }}
     >
       <div className="fixed z-2 lg:ml-5 lg:mt-5 sm:ml-6 sm:mt-6">

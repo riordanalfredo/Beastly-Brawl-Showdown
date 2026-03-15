@@ -23,7 +23,7 @@ const SeasonalEventDefeated: React.FC = () => {
 
         <img
           className="w-[40rem] h-[40rem] xl:w-[20rem] xl:h-[20rem]"
-          src={`https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
+          src={`https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/ending/GRAVE.png`}
           alt={`GRAVE image`}
         />
 

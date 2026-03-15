@@ -3,21 +3,21 @@ import React from "react";
 
 export const DefendPage = () => {
   const shield =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD.png";
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD.png";
   const defend =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/DEFEND.png";
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/DEFEND.png";
   const rhino =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/ROCKY_RHINO.png";
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/ROCKY_RHINO.png";
 
   const pogo =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/POISON_POGO.png";
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/POISON_POGO.png";
 
   const brokenShield =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD_BROKEN.png";
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD_BROKEN.png";
   const crackedShield =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD_CRACK.png";
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD_CRACK.png";
   const expiredShield =
-    "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD_EXPIRE.png";
+    "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/animation/SHIELD_EXPIRE.png";
 
   const characters = [
     {

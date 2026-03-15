@@ -33,7 +33,7 @@ import { ConsumableState } from "/types/single/itemState";
 import { EquipmentPickupPopup } from "../../components/popups/EquipmentPickupPopup";
 import { StoryItem } from "../../../../server/src/model/game/storyItem/storyItem";
 import { StoryItemPickupPopup } from "../../components/popups/StoryItemPickupPopup";
-import { isBGMEnabled, playBGM,toggleBGM,initBGM } from "../../audioManager";
+import { isBGMEnabled, playBGM, toggleBGM, initBGM } from "../../audioManager";
 import { Status } from "../../../../server/src/model/game/status/status";
 import { StatusPickupPopup } from "../../components/popups/StatusPickupPopup";
 import { EquipmentInventoryFullPopup } from "../../components/popups/EquipmentInventoryFullPopup";
@@ -74,7 +74,7 @@ const AdventureBattle: React.FC<AdventureProps> = ({ levelMonster }) => {
   const [equipmentId, setEquipmentId] = useState<string | null>(null);
   const [equipmentInventoryFull, setEquipmentInventoryFull] = useState(false);
   const [currentEquipment, setCurrentEquipment] = useState<EquipmentState[]>(
-    []
+    [],
   );
   const [incomingEquipment, setIncomingEquipment] =
     useState<EquipmentState | null>(null);
@@ -92,13 +92,13 @@ const AdventureBattle: React.FC<AdventureProps> = ({ levelMonster }) => {
   const [diceValue, setDiceValue] = useState<number>(0); // result of dice
 
   var backgroundString =
-    "url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/" +
+    "url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/" +
     background +
     ".jpg')";
 
   const handleChoiceSelect = (
     choiceId: string,
-    itemNames: string[] | null = null
+    itemNames: string[] | null = null,
   ) => {
     socket.emit("adventure_choice", { stage, choiceId });
     setChoices(null);
@@ -144,8 +144,7 @@ const AdventureBattle: React.FC<AdventureProps> = ({ levelMonster }) => {
   }, [battleState]);
   useEffect(() => {
     playBGM("/music/Beastly_Brawl_Battle.wav");
-  
-    }, []);
+  }, []);
 
   useEffect(() => {
     console.log("---ADV: Adventure State Updated---");
@@ -459,7 +458,7 @@ const AdventureBattle: React.FC<AdventureProps> = ({ levelMonster }) => {
                     >
                       <img
                         src={
-                          "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/items/backpack.png"
+                          "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/items/backpack.png"
                         }
                         className={"w-[90%] h-[90%] object-contain mx-auto"}
                       />
@@ -567,7 +566,7 @@ const AdventureBattle: React.FC<AdventureProps> = ({ levelMonster }) => {
                   <div className="relative inline-block">
                     <img
                       src={
-                        "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/items/backpack.png"
+                        "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/items/backpack.png"
                       }
                       className="w-[80%] h-[80%] object-contain mx-auto"
                     />
@@ -645,7 +644,7 @@ const biomeMap = new Map([
   [MonsterIdentifier.FURIOUS_FLIPPER, () => "ARCTIC"],
   [MonsterIdentifier.POISON_POGO, () => "MARSH"],
   [MonsterIdentifier.CHARMER_COBRA, () => "DESERT"],
-  [MonsterIdentifier.JACKED_O_LANTERN, () => "MARSH"]
+  [MonsterIdentifier.JACKED_O_LANTERN, () => "MARSH"],
 ]);
 
 export function getBiomeString(monsterID: MonsterIdentifier) {

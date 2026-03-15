@@ -14,37 +14,36 @@ import { eventMeta } from "../../data/eventMeta";
 import { monsterMeta } from "../../data/monsterMeta";
 
 interface SeasonalEventHomeProps {
-  eventId: SeasonalEventIdentifier
+  eventId: SeasonalEventIdentifier;
 }
 
 const SeasonalEventHome: React.FC<SeasonalEventHomeProps> = ({ eventId }) => {
-const [observedEvent, setObservedEvent] = useState<number>(10);
+  const [observedEvent, setObservedEvent] = useState<number>(10);
 
   // Seasonal Event → Monster mapping
   const eventMap: Record<number, SeasonalEventIdentifier> = {
-    9: SeasonalEventIdentifier.SPOOK_GARDEN
+    9: SeasonalEventIdentifier.SPOOK_GARDEN,
   };
   const monsterMap: Record<number, MonsterIdentifier> = {
-    9: MonsterIdentifier.JACKED_O_LANTERN
+    9: MonsterIdentifier.JACKED_O_LANTERN,
   };
 
   // Resolve event and monster data
   const event = eventMap[observedEvent] ?? SeasonalEventIdentifier.SPOOK_GARDEN;
-  const monster = monsterMap[observedEvent] ?? MonsterIdentifier.JACKED_O_LANTERN;
+  const monster =
+    monsterMap[observedEvent] ?? MonsterIdentifier.JACKED_O_LANTERN;
 
-  const { name: eventName, description: eventDescription } =
-    eventMeta[event];
+  const { name: eventName, description: eventDescription } = eventMeta[event];
 
   const { name: monsterName, description: monsterDescription } =
     monsterMeta[monster];
 
-
   // Monster image (coloured or silhouette if locked)
-  const monsterImage = `https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/character/${monster}.png`
+  const monsterImage = `https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/character/${monster}.png`;
 
   // Background image
-  const backgroundString = `url('https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/background/${getBiomeString(
-    monster
+  const backgroundString = `url('https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/background/${getBiomeString(
+    monster,
   )}.jpg')`;
 
   const renderEventMonsterSelect = () => {
@@ -109,31 +108,25 @@ const [observedEvent, setObservedEvent] = useState<number>(10);
         </div>
         {/* Navigation (fixed to bottom) */}
         <div className="fixed bottom-25 left-1/2 -translate-x-1/5 grid grid-cols-3 items-center w-[70%] lg:max-w-md z-40">
-            {/* Enter Button (centered) */}
-            <div className="flex justify-center">
+          {/* Enter Button (centered) */}
+          <div className="flex justify-center">
             <ButtonGeneric
-                color="ronchi"
-                size="battle"
-                onClick={
-                renderEventMonsterSelect
-                }
+              color="ronchi"
+              size="battle"
+              onClick={renderEventMonsterSelect}
             >
-                <div className="min-w-[6rem] sm:min-w-[8rem] lg:min-w-[10rem] text-center">
-                <OutlineText size={"choice-text"}>
-                    ENTER
-                </OutlineText>
-                </div>
+              <div className="min-w-[6rem] sm:min-w-[8rem] lg:min-w-[10rem] text-center">
+                <OutlineText size={"choice-text"}>ENTER</OutlineText>
+              </div>
             </ButtonGeneric>
-            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const biomeMap = new Map([
-  [MonsterIdentifier.JACKED_O_LANTERN, () => "MARSH"]
-]);
+const biomeMap = new Map([[MonsterIdentifier.JACKED_O_LANTERN, () => "MARSH"]]);
 
 export function getBiomeString(monsterID: MonsterIdentifier) {
   //default return is forest :)

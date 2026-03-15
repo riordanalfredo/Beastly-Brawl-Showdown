@@ -25,7 +25,10 @@ import { PopupClean } from "../../components/popups/PopupClean";
 import { IconButton } from "../../components/buttons/IconButton";
 import { Popup } from "../../components/popups/Popup";
 import { ArchetypePopup } from "../../components/popups/ArchetypePopup";
-import { removeSelectedBackgroundTheme, setSelectedBackgroundTheme } from "../../selectedBackgroundTheme";
+import {
+  removeSelectedBackgroundTheme,
+  setSelectedBackgroundTheme,
+} from "../../selectedBackgroundTheme";
 
 interface MonsterSelectProps {
   setScreen: (screen: Screens) => void;
@@ -35,7 +38,7 @@ export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen }) => {
   const [monsters, setMonsters] = useState<MonsterState[]>([]);
   const [archetypes, setArchetypes] = useState<ArchetypeInfo[]>([]);
   const [selectedMonster, setSelectedMonster] = useState<MonsterState | null>(
-    null
+    null,
   );
   const [selectedArchetype, setSelectedArchetype] =
     useState<ArchetypeInfo | null>(null);
@@ -184,7 +187,7 @@ export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen }) => {
         </div>
         {monsters
           .filter(
-            (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER
+            (monster) => monster.archetypeId === ArchetypeIdentifier.DEFENDER,
           )
           .map((monster) => (
             <MonsterSelectionCard
@@ -212,7 +215,7 @@ export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen }) => {
         </div>
         {monsters
           .filter(
-            (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED
+            (monster) => monster.archetypeId === ArchetypeIdentifier.BALANCED,
           )
           .map((monster) => (
             <MonsterSelectionCard
@@ -240,7 +243,7 @@ export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen }) => {
         </div>
         {monsters
           .filter(
-            (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER
+            (monster) => monster.archetypeId === ArchetypeIdentifier.ATTACKER,
           )
           .map((monster) => (
             <MonsterSelectionCard
@@ -302,7 +305,7 @@ export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen }) => {
                 min-w-0
               `}
             >
-          {/* <div
+              {/* <div
             className={`flex  
             justify-around border-[4px] 
             border-blackCurrant w-min h-min rounded-xl
@@ -321,108 +324,108 @@ export const MonsterSelect: React.FC<MonsterSelectProps> = ({ setScreen }) => {
             flex-col
             items-center`}
           > */}
-            <div className="pt-4" />
-            <BaseCard
-              color="goldenRod"
-              className="flex flex-col justify-around sm:w-[55rem] lg:w-[80rem] h-min"
-            >
-              <MonsterImage
-                name={selectedMonster.id}
-                className="sm:size-[20rem]
+              <div className="pt-4" />
+              <BaseCard
+                color="goldenRod"
+                className="flex flex-col justify-around sm:w-[55rem] lg:w-[80rem] h-min"
+              >
+                <MonsterImage
+                  name={selectedMonster.id}
+                  className="sm:size-[20rem]
                             lg:size-[10rem]"
-              />
-              <div className="w-[100%] flex items-center flex-col">
-                <div className="bg-ronchi border-[4px] pr-[0.5rem] pl-[0.5rem] rounded-tl-xl rounded-tr-xl border-b-0 border-blackCurrant w-min text-nowrap">
-                  <OutlineText size="medium">
-                    {selectedMonster.name}
-                  </OutlineText>
-                </div>
-                <BaseCard
-                  color="peach"
-                  className="flex flex-col items-center sm:h-min sm:w-[90%] lg:h-min lg:w:[90%]"
-                >
-                  <div className="pt-[1pt]" />
-                  <div className="w-[95%] text-left">
-                    <OutlineText size="medium">Total Health:</OutlineText>
-                    <TotalHealthBar
-                      totalHealth={selectedMonster.maxHealth}
-                      highestTotalHealth={40}
-                    />
+                />
+                <div className="w-[100%] flex items-center flex-col">
+                  <div className="bg-ronchi border-[4px] pr-[0.5rem] pl-[0.5rem] rounded-tl-xl rounded-tr-xl border-b-0 border-blackCurrant w-min text-nowrap">
+                    <OutlineText size="medium">
+                      {selectedMonster.name}
+                    </OutlineText>
                   </div>
-                  <div className="w-[95%] text-left">
-                    <OutlineText size="medium">Armour Class:</OutlineText>
-                    <ArmourClassBar
-                      armourClass={selectedMonster.armourClass}
-                      highestArmourClass={20}
-                    />
-                  </div>
-                  <div className="w-[95%] text-left">
-                    <OutlineText size="medium">Attack Bonus:</OutlineText>
-                    <AttackBonusBar
-                      attackBonus={selectedMonster.attackBonus}
-                      highestAttackBonus={10}
-                    />
-                  </div>
-                  <div className="pb-[7pt]" />
-                </BaseCard>
-              </div>
-
-              <div className="mt-[1rem] flex flex-col items-center justify-start">
-                <p className="text-outline font-[Jua] sm:text-[4rem] md:text-[2rem] lg:text[2rem]">
-                  SPECIAL ABILITIES
-                </p>
-                <div className="flex flex-col justify-center lg:flex-row w-full">
-                  {abilities.map((ability, idx) => (
-                    <div
-                      key={ability.id || idx}
-                      className="flex flex-row items-center grow-1 justify-left p-[1rem]"
-                    >
-                      <img
-                        src={
-                          "https://spaces-bbs.syd1.cdn.digitaloceanspaces.com/assets/action/" +
-                          ability.id +
-                          ".webp"
-                        }
-                        alt="ability icon"
-                        className="w-[7rem] h-[7rem] rounded-xl border-blackCurrant border-[4px]"
+                  <BaseCard
+                    color="peach"
+                    className="flex flex-col items-center sm:h-min sm:w-[90%] lg:h-min lg:w:[90%]"
+                  >
+                    <div className="pt-[1pt]" />
+                    <div className="w-[95%] text-left">
+                      <OutlineText size="medium">Total Health:</OutlineText>
+                      <TotalHealthBar
+                        totalHealth={selectedMonster.maxHealth}
+                        highestTotalHealth={40}
                       />
-                      <div className="p-[0.5rem]">
-                        <p className="text-outline font-[Jua] sm:text-[4rem] md:text-[2rem] lg:text[2rem]">
-                          {ability.name}
-                        </p>
-                        {/**<BlackText size="medium">{ability.description}</BlackText>*/}
-                        <p className="text-blackCurrant font-[Jua] sm:text-[2rem] md:text[1rem] lg:text[0.5rem] text-ellipses">
-                          {ability.description}
-                        </p>
-                      </div>
                     </div>
-                  ))}
+                    <div className="w-[95%] text-left">
+                      <OutlineText size="medium">Armour Class:</OutlineText>
+                      <ArmourClassBar
+                        armourClass={selectedMonster.armourClass}
+                        highestArmourClass={20}
+                      />
+                    </div>
+                    <div className="w-[95%] text-left">
+                      <OutlineText size="medium">Attack Bonus:</OutlineText>
+                      <AttackBonusBar
+                        attackBonus={selectedMonster.attackBonus}
+                        highestAttackBonus={10}
+                      />
+                    </div>
+                    <div className="pb-[7pt]" />
+                  </BaseCard>
                 </div>
-              </div>
-            </BaseCard>
 
-            <div className="flex flex-row space-x-10 justify-around pt-[2dvh] pb-[2dvh]">
-              <ButtonGeneric
-                color="red"
-                size="medium"
-                onClick={() => {
-                  handleCancelSelection();
-                }}
-              >
-                <OutlineText size="medium">CANCEL</OutlineText>
-              </ButtonGeneric>
-              <ButtonGeneric
-                color="blue"
-                size="medium"
-                onClick={() => {
-                  handleConfirmSelection();
-                }}
-              >
-                <OutlineText size="medium">CONFIRM</OutlineText>
-              </ButtonGeneric>
+                <div className="mt-[1rem] flex flex-col items-center justify-start">
+                  <p className="text-outline font-[Jua] sm:text-[4rem] md:text-[2rem] lg:text[2rem]">
+                    SPECIAL ABILITIES
+                  </p>
+                  <div className="flex flex-col justify-center lg:flex-row w-full">
+                    {abilities.map((ability, idx) => (
+                      <div
+                        key={ability.id || idx}
+                        className="flex flex-row items-center grow-1 justify-left p-[1rem]"
+                      >
+                        <img
+                          src={
+                            "https://spaces-beastly-brawl.syd1.cdn.digitaloceanspaces.com/assets/action/" +
+                            ability.id +
+                            ".webp"
+                          }
+                          alt="ability icon"
+                          className="w-[7rem] h-[7rem] rounded-xl border-blackCurrant border-[4px]"
+                        />
+                        <div className="p-[0.5rem]">
+                          <p className="text-outline font-[Jua] sm:text-[4rem] md:text-[2rem] lg:text[2rem]">
+                            {ability.name}
+                          </p>
+                          {/**<BlackText size="medium">{ability.description}</BlackText>*/}
+                          <p className="text-blackCurrant font-[Jua] sm:text-[2rem] md:text[1rem] lg:text[0.5rem] text-ellipses">
+                            {ability.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </BaseCard>
+
+              <div className="flex flex-row space-x-10 justify-around pt-[2dvh] pb-[2dvh]">
+                <ButtonGeneric
+                  color="red"
+                  size="medium"
+                  onClick={() => {
+                    handleCancelSelection();
+                  }}
+                >
+                  <OutlineText size="medium">CANCEL</OutlineText>
+                </ButtonGeneric>
+                <ButtonGeneric
+                  color="blue"
+                  size="medium"
+                  onClick={() => {
+                    handleConfirmSelection();
+                  }}
+                >
+                  <OutlineText size="medium">CONFIRM</OutlineText>
+                </ButtonGeneric>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       )}
     </div>
