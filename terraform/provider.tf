@@ -11,7 +11,7 @@ terraform {
       s3 = "https://syd1.digitaloceanspaces.com"
     }
 
-    bucket = "spaces-bbs"
+    bucket = "spaces-beastly-brawl"
 
     # This deactivates some AWS S3 features that are not needed for DigitalOcean Spaces.
     skip_credentials_validation = true
